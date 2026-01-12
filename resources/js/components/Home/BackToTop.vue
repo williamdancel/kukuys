@@ -8,7 +8,7 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 </template>
-<script>
+<script lang="ts">
     export default {
         name: 'BackToTop',
         data() {
@@ -19,7 +19,7 @@
         mounted() {
             window.addEventListener('scroll', this.handleScroll);
         },
-        beforeDestroy() {
+        beforeUnmount() {
             window.removeEventListener('scroll', this.handleScroll);
         },
         methods: {

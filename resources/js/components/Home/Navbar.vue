@@ -55,7 +55,7 @@
                 </div>
             </nav>
 </template>
-<script>
+<script lang="ts">
     export default {
     name: 'Navbar',
     data() {
@@ -64,7 +64,7 @@
         };
     },
     methods: {
-        scrollToSection(sectionId) {
+        scrollToSection(sectionId: string) {
             const section = document.getElementById(sectionId);
             if (section) {
                 section.scrollIntoView({ behavior: 'smooth' });

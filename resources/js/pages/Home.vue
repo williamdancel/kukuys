@@ -47,7 +47,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import HomeSection from '@/components/Home/HomeSection.vue';
 import LoadingScreen from '@/components/Home/LoadingScreen.vue';
 import Navbar from '@/components/Home/Navbar.vue';

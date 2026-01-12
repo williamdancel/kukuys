@@ -22,6 +22,6 @@
             
         <!-- Tagline -->
         <p class="text-gray-400 text-center mt-12 text-lg animate-pulse">
-            Elite Dota 2 Pros & Top Streamers United
+            Elite Dota 2 Pros <br>& Top Kick Streamers United
     </p>
 </template>

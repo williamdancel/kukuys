@@ -55,13 +55,13 @@
             </div>
     </section>
 </template>
-<script>
+<script lang="ts">
     export default {
         name: 'HomeSection',
         data() {
             return {};
         },methods: {
-            scrollToSection(sectionId) {
+            scrollToSection(sectionId: string) {
                 const element = document.getElementById(sectionId);
                 if (element) {
                     const offset = 80; // Adjust for sticky header
