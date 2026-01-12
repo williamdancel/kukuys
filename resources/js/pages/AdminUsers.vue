@@ -19,7 +19,7 @@ const breadcrumbs: BreadcrumbItem[] = [
         <div
             class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
         >
-            <h1 class="text-2xl text-center font-semibold">Merch Store Page Coming Soon!</h1>
+            <h1 class="text-2xl text-center font-semibold">Admin Users Page Coming Soon!</h1>
         </div>
     </AppLayout>
 </template>
