@@ -13,7 +13,7 @@
                 Elite Dota 2 Pros & Top Streamers United. <br> Watch us dominate on Kick.
             </p>
             <div class="flex flex-col md:flex-row gap-4 justify-center mb-16">
-                <button class="group relative bg-gradient-to-r from-green-600 to-emerald-500 text-white px-8 py-4 rounded-lg font-bold text-lg 
+                <button class="cursor-pointer group relative bg-gradient-to-r from-green-600 to-emerald-500 text-white px-8 py-4 rounded-lg font-bold text-lg 
                 hover:from-green-700 hover:to-emerald-600 transition-all 
                 transform hover:scale-105 shadow-lg shadow-green-500/25" @click="scrollToSection('kukuys')">
                     <div class="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-400 opacity-0 group-hover:opacity-20 blur-xl transition-opacity"></div>
