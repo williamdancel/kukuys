@@ -11,7 +11,16 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import {   
+    dashboard, 
+    dotaPubTracker, 
+    taryahanCs, 
+    partnerEnquiries,
+    members,
+    merchStore,
+    adminUsers,       
+
+} from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { LayoutGrid, Gamepad, Gamepad2, Handshake, Users, Store, UserCheck } from 'lucide-vue-next';
@@ -24,27 +33,27 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },{
         title: 'Dota Pub Tracker',
-        href: dashboard(),
+        href: dotaPubTracker(),
         icon: Gamepad,
     },{
-        title: 'Taryahan CS2',
-        href: dashboard(),
+        title: 'Taryahan CS',
+        href: taryahanCs(),
         icon: Gamepad2,
     },{
         title: 'Partner Enquiries',
-        href: dashboard(),
+        href: partnerEnquiries(),
         icon: Handshake,
     },{
-        title: 'Kukuys Members',
-        href: dashboard(),
+        title: 'Members',
+        href: members(),
         icon: Users,
     },{
-        title: 'Kukuys Merch Store',
-        href: dashboard(),
+        title: 'Merch Store',
+        href: merchStore(),
         icon: Store,
     },{
         title: 'Admin Users',
-        href: dashboard(),
+        href: adminUsers(),
         icon: UserCheck,
     }
 ];
