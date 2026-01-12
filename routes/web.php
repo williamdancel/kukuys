@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PartnerEnquiryController;
+use App\Http\Controllers\DotaPubRecordController;
 
 Route::get('/', function () {
     return Inertia::render('Home');
@@ -44,6 +45,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/api/partner-enquiries', [PartnerEnquiryController::class, 'index']);
     Route::delete('/api/partner-enquiries/{id}', [PartnerEnquiryController::class, 'destroy']);
     Route::get('/api/partner-enquiries/statistics', [PartnerEnquiryController::class, 'statistics']);
+});
+
+// Add these for Dota Pub Tracker API (CORRECTED VERSION)
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/api/dota-pub-records', [DotaPubRecordController::class, 'index']);
+    Route::post('/api/dota-pub-records', [DotaPubRecordController::class, 'store']);
+    Route::get('/api/dota-pub-records/statistics', [DotaPubRecordController::class, 'statistics']);
+    Route::get('/api/dota-pub-records/{id}', [DotaPubRecordController::class, 'show']);
+    Route::put('/api/dota-pub-records/{id}', [DotaPubRecordController::class, 'update']);
+    Route::delete('/api/dota-pub-records/{id}', [DotaPubRecordController::class, 'destroy']);
 });
 
 require __DIR__.'/settings.php';
