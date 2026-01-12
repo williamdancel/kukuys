@@ -14,7 +14,7 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { LayoutGrid } from 'lucide-vue-next';
+import { LayoutGrid, Gamepad, Gamepad2, Handshake, Users, Store, UserCheck } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -22,7 +22,31 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
-    },
+    },{
+        title: 'Dota Pub Tracker',
+        href: dashboard(),
+        icon: Gamepad,
+    },{
+        title: 'Taryahan CS2',
+        href: dashboard(),
+        icon: Gamepad2,
+    },{
+        title: 'Partner Enquiries',
+        href: dashboard(),
+        icon: Handshake,
+    },{
+        title: 'Kukuys Members',
+        href: dashboard(),
+        icon: Users,
+    },{
+        title: 'Kukuys Merch Store',
+        href: dashboard(),
+        icon: Store,
+    },{
+        title: 'Admin Users',
+        href: dashboard(),
+        icon: UserCheck,
+    }
 ];
 
 const footerNavItems: NavItem[] = [
