@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PartnerEnquiryController;
 use App\Http\Controllers\DotaPubRecordController;
+use App\Http\Controllers\TaryahanMatchController;
 
 Route::get('/', function () {
     return Inertia::render('Home');
@@ -17,9 +18,9 @@ Route::get('dota-pub-tracker', function () {
     return Inertia::render('DotaPubTracker');
 })->middleware(['auth', 'verified'])->name('dota-pub-tracker');
 
-Route::get('taryahan-cs', function () {
-    return Inertia::render('TaryahanCs');
-})->middleware(['auth', 'verified'])->name('taryahan-cs');
+Route::get('taryahan', function () {
+    return Inertia::render('Taryahan');
+})->middleware(['auth', 'verified'])->name('taryahan');
 
 Route::get('partner-enquiries', function () {
     return Inertia::render('PartnerEnquiries');
@@ -45,16 +46,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/api/partner-enquiries', [PartnerEnquiryController::class, 'index']);
     Route::delete('/api/partner-enquiries/{id}', [PartnerEnquiryController::class, 'destroy']);
     Route::get('/api/partner-enquiries/statistics', [PartnerEnquiryController::class, 'statistics']);
-});
 
-// Add these for Dota Pub Tracker API (CORRECTED VERSION)
-Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/api/dota-pub-records', [DotaPubRecordController::class, 'index']);
     Route::post('/api/dota-pub-records', [DotaPubRecordController::class, 'store']);
     Route::get('/api/dota-pub-records/statistics', [DotaPubRecordController::class, 'statistics']);
     Route::get('/api/dota-pub-records/{id}', [DotaPubRecordController::class, 'show']);
     Route::put('/api/dota-pub-records/{id}', [DotaPubRecordController::class, 'update']);
     Route::delete('/api/dota-pub-records/{id}', [DotaPubRecordController::class, 'destroy']);
+
+    Route::get('/api/taryahan/matches', [TaryahanMatchController::class, 'index']);
+    Route::post('/api/taryahan/matches', [TaryahanMatchController::class, 'store']);
+    Route::get('/api/taryahan/matches/statistics', [TaryahanMatchController::class, 'statistics']);
+    Route::get('/api/taryahan/matches/{id}', [TaryahanMatchController::class, 'show']);
+    Route::put('/api/taryahan/matches/{id}', [TaryahanMatchController::class, 'updateWinner']);
+    Route::delete('/api/taryahan/matches/{id}', [TaryahanMatchController::class, 'destroy']);
 });
 
 require __DIR__.'/settings.php';

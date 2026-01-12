@@ -14,7 +14,7 @@ import {
 import {   
     dashboard, 
     dotaPubTracker, 
-    taryahanCs, 
+    taryahan, 
     partnerEnquiries,
     members,
     merchStore,
@@ -36,8 +36,8 @@ const mainNavItems: NavItem[] = [
         href: dotaPubTracker(),
         icon: Gamepad,
     },{
-        title: 'Taryahan CS',
-        href: taryahanCs(),
+        title: 'Taryahan',
+        href: taryahan(),
         icon: Gamepad2,
     },{
         title: 'Partner Enquiries',
