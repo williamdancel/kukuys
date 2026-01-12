@@ -82,161 +82,170 @@
     </section>
 </template>
 
-<script>
-import axios from 'axios';
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import axios, { AxiosError } from 'axios';
 
-export default {
-    name: 'PartnerEnquirySection',
-    data() {
-        return {
-            partnerForm: {
+interface PartnerForm {
+    name: string;
+    email: string;
+    company: string;
+    message: string;
+}
+
+interface FormErrors {
+    [key: string]: string[];
+}
+
+const partnerForm = ref<PartnerForm>({
+    name: '',
+    email: '',
+    company: '',
+    message: ''
+});
+
+const isSubmitting = ref<boolean>(false);
+const successMessage = ref<string>('');
+const errorMessage = ref<string>('');
+const errors = ref<FormErrors>({});
+
+onMounted(() => {
+    // Set CSRF token
+    const token = document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement;
+    if (token) {
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    }
+});
+
+// Client-side validation
+const validateForm = (): FormErrors => {
+    const validationErrors: FormErrors = {};
+    
+    // Name validation
+    if (!partnerForm.value.name.trim()) {
+        validationErrors.name = ['Your name is required.'];
+    } else if (partnerForm.value.name.length > 50) {
+        validationErrors.name = ['Name must not exceed 50 characters.'];
+    } else if (containsScript(partnerForm.value.name)) {
+        validationErrors.name = ['Invalid characters in name.'];
+    }
+    
+    // Email validation
+    if (!partnerForm.value.email.trim()) {
+        validationErrors.email = ['Email address is required.'];
+    } else if (!isValidEmail(partnerForm.value.email)) {
+        validationErrors.email = ['Please enter a valid email address.'];
+    } else if (partnerForm.value.email.length > 50) {
+        validationErrors.email = ['Email must not exceed 50 characters.'];
+    }
+    
+    // Company validation
+    if (!partnerForm.value.company.trim()) {
+        validationErrors.company = ['Company name is required.'];
+    } else if (partnerForm.value.company.length > 50) {
+        validationErrors.company = ['Company name must not exceed 50 characters.'];
+    } else if (containsScript(partnerForm.value.company)) {
+        validationErrors.company = ['Invalid characters in company name.'];
+    }
+    
+    // Message validation
+    if (!partnerForm.value.message.trim()) {
+        validationErrors.message = ['Please enter your partnership proposal.'];
+    } else if (partnerForm.value.message.length > 2000) {
+        validationErrors.message = ['Message must not exceed 2000 characters.'];
+    } else if (containsScript(partnerForm.value.message)) {
+        validationErrors.message = ['Invalid characters in message.'];
+    }
+    
+    return validationErrors;
+};
+
+// Check if input contains script tags
+const containsScript = (text: string): boolean => {
+    const scriptPattern = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
+    const onEventPattern = /on\w+\s*=/gi;
+    const javascriptPattern = /javascript:/gi;
+    
+    return scriptPattern.test(text) || 
+           onEventPattern.test(text) || 
+           javascriptPattern.test(text);
+};
+
+// Validate email format
+const isValidEmail = (email: string): boolean => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+};
+
+// Sanitize input on client side too
+const sanitizeInput = (input: string): string => {
+    return input
+        .replace(/<[^>]*>/g, '') // Remove HTML tags
+        .replace(/javascript:/gi, '') // Remove javascript:
+        .replace(/on\w+\s*=\s*("[^"]*"|'[^']*'|[^"'>\s]+)/gi, '') // Remove event handlers
+        .trim();
+};
+
+const submitPartnerForm = async (): Promise<void> => {
+    // Client-side validation first
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+        errors.value = validationErrors;
+        errorMessage.value = 'Please check the form for errors.';
+        return;
+    }
+    
+    isSubmitting.value = true;
+    successMessage.value = '';
+    errorMessage.value = '';
+    errors.value = {};
+    
+    try {
+        // Sanitize data before sending
+        const sanitizedData = {
+            name: sanitizeInput(partnerForm.value.name),
+            email: partnerForm.value.email.trim(),
+            company: sanitizeInput(partnerForm.value.company),
+            message: sanitizeInput(partnerForm.value.message)
+        };
+        
+        const response = await axios.post('/partner-enquiries', sanitizedData);
+        
+        if (response.data.success) {
+            successMessage.value = response.data.message || 'Thank you! Your partnership enquiry has been submitted successfully.';
+            
+            // Reset form
+            partnerForm.value = {
                 name: '',
                 email: '',
                 company: '',
                 message: ''
-            },
-            isSubmitting: false,
-            successMessage: '',
-            errorMessage: '',
-            errors: {}
+            };
+            
+            // Auto-clear success message after 5 seconds
+            setTimeout(() => {
+                successMessage.value = '';
+            }, 5000);
         }
-    },
-    mounted() {
-        // Set CSRF token
-        const token = document.querySelector('meta[name="csrf-token"]');
-        if (token) {
-            axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    } catch (error) {
+        const axiosError = error as AxiosError;
+        
+        if (axiosError.response && axiosError.response.status === 422) {
+            // Validation errors from server
+            const errorData = axiosError.response.data as { errors?: FormErrors; message?: string };
+            errors.value = errorData.errors || {};
+            errorMessage.value = errorData.message || 'Please check the form for errors below.';
+        } else {
+            // Generic error message
+            errorMessage.value = 'Unable to submit your enquiry at the moment. Please try again later.';
         }
-    },
-    methods: {
-        // Client-side validation
-        validateForm() {
-            const errors = {};
-            
-            // Name validation
-            if (!this.partnerForm.name.trim()) {
-                errors.name = ['Your name is required.'];
-            } else if (this.partnerForm.name.length > 50) {
-                errors.name = ['Name must not exceed 50 characters.'];
-            } else if (this.containsScript(this.partnerForm.name)) {
-                errors.name = ['Invalid characters in name.'];
-            }
-            
-            // Email validation
-            if (!this.partnerForm.email.trim()) {
-                errors.email = ['Email address is required.'];
-            } else if (!this.isValidEmail(this.partnerForm.email)) {
-                errors.email = ['Please enter a valid email address.'];
-            } else if (this.partnerForm.email.length > 50) {
-                errors.email = ['Email must not exceed 50 characters.'];
-            }
-            
-            // Company validation
-            if (!this.partnerForm.company.trim()) {
-                errors.company = ['Company name is required.'];
-            } else if (this.partnerForm.company.length > 50) {
-                errors.company = ['Company name must not exceed 50 characters.'];
-            } else if (this.containsScript(this.partnerForm.company)) {
-                errors.company = ['Invalid characters in company name.'];
-            }
-            
-            // Message validation
-            if (!this.partnerForm.message.trim()) {
-                errors.message = ['Please enter your partnership proposal.'];
-            } else if (this.partnerForm.message.length > 2000) {
-                errors.message = ['Message must not exceed 2000 characters.'];
-            } else if (this.containsScript(this.partnerForm.message)) {
-                errors.message = ['Invalid characters in message.'];
-            }
-            
-            return errors;
-        },
         
-        // Check if input contains script tags
-        containsScript(text) {
-            const scriptPattern = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
-            const onEventPattern = /on\w+\s*=/gi;
-            const javascriptPattern = /javascript:/gi;
-            
-            return scriptPattern.test(text) || 
-                   onEventPattern.test(text) || 
-                   javascriptPattern.test(text);
-        },
-        
-        // Validate email format
-        isValidEmail(email) {
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailPattern.test(email);
-        },
-        
-        // Sanitize input on client side too
-        sanitizeInput(input) {
-            return input
-                .replace(/<[^>]*>/g, '') // Remove HTML tags
-                .replace(/javascript:/gi, '') // Remove javascript:
-                .replace(/on\w+\s*=\s*("[^"]*"|'[^']*'|[^"'>\s]+)/gi, '') // Remove event handlers
-                .trim();
-        },
-        
-        async submitPartnerForm() {
-            // Client-side validation first
-            const validationErrors = this.validateForm();
-            if (Object.keys(validationErrors).length > 0) {
-                this.errors = validationErrors;
-                this.errorMessage = 'Please check the form for errors.';
-                return;
-            }
-            
-            this.isSubmitting = true;
-            this.successMessage = '';
-            this.errorMessage = '';
-            this.errors = {};
-            
-            try {
-                // Sanitize data before sending
-                const sanitizedData = {
-                    name: this.sanitizeInput(this.partnerForm.name),
-                    email: this.partnerForm.email.trim(),
-                    company: this.sanitizeInput(this.partnerForm.company),
-                    message: this.sanitizeInput(this.partnerForm.message)
-                };
-                
-                const response = await axios.post('/partner-enquiries', sanitizedData);
-                
-                if (response.data.success) {
-                    this.successMessage = response.data.message || 'Thank you! Your partnership enquiry has been submitted successfully.';
-                    
-                    // Reset form
-                    this.partnerForm = {
-                        name: '',
-                        email: '',
-                        company: '',
-                        message: ''
-                    };
-                    
-                    // Auto-clear success message after 5 seconds
-                    setTimeout(() => {
-                        this.successMessage = '';
-                    }, 5000);
-                }
-            } catch (error) {
-                if (error.response && error.response.status === 422) {
-                    // Validation errors from server
-                    this.errors = error.response.data.errors || {};
-                    this.errorMessage = error.response.data.message || 'Please check the form for errors below.';
-                } else {
-                    // Generic error message
-                    this.errorMessage = 'Unable to submit your enquiry at the moment. Please try again later.';
-                }
-                
-                // Auto-clear error message after 5 seconds
-                setTimeout(() => {
-                    this.errorMessage = '';
-                }, 5000);
-            } finally {
-                this.isSubmitting = false;
-            }
-        }
+        // Auto-clear error message after 5 seconds
+        setTimeout(() => {
+            errorMessage.value = '';
+        }, 5000);
+    } finally {
+        isSubmitting.value = false;
     }
-}
+};
 </script>
