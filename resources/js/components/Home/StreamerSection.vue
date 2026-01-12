@@ -138,7 +138,7 @@ export default {
                     id: 1,
                     name: 'Gabbi',
                     nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 1 | Carry', 'Major Champion', 'WESG Champion'],
+                    tags: ['Professional Dota 2 Player', 'Position 1 | Carry', 'Major Champion', 'TI Player', 'WESG Champion'],
                     description: 'Filipino Dota 2 core player known for explosive teamfight impact and international success.',
                     followers: 80800,
                     kickLink: 'https://kick.com/gabbidoto',
@@ -150,7 +150,7 @@ export default {
                     id: 2,
                     name: 'Kuku',
                     nameIcon: '',
-                    tags: ['GodFather of PH Dota 2','Professional Dota 2 Player', 'Position 5 | Hard Support', 'WESG Champion'],
+                    tags: ['GodFather of PH Dota 2','Professional Dota 2 Player', 'Position 5 | Hard Support', 'Top 7 TI', 'WESG Champion'],
                     description: 'Veteran Filipino Dota 2 captain known for elite leadership, strong shot-calling, and international success.',
                     followers: 69000,
                     kickLink: 'https://kick.com/kukudota2',
@@ -162,14 +162,14 @@ export default {
                     id: 3,
                     name: 'Armel',
                     nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 2 | Midlaner', 'Major Champion', 'WESG Champion'],
+                    tags: ['Professional Dota 2 Player', 'Position 2 | Midlaner', 'Major Champion', 'TI Player', 'WESG Champion'],
                     description: 'Filipino Dota 2 mid player known for high-level mechanics and international success.',
                     followers: 66600,
                     kickLink: 'https://kick.com/armeldoto',
                     websiteLink: 'https://armeldota.com/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/armel.jpg'
+                    image: 'images/kukuys_streamer/armel.png'
                 },{
                     id: 4,
                     name: 'DJ',
@@ -306,7 +306,7 @@ export default {
                     id: 15,  
                     name: 'Natsumi',
                     nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 1 | Carry', 'Riyadh Player', 'Carry for OG'],
+                    tags: ['Professional Dota 2 Player', 'Riyadh Player', 'Carry for OG'],
                     description: 'Filipino Dota 2 carry known for sharp mechanics, strategic farming, and international experience.',
                     followers: 33600,
                     kickLink: 'https://kick.com/natsumidota',
@@ -318,7 +318,7 @@ export default {
                     id: 16,  
                     name: 'Nikko',
                     nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 3 | Offlane', 'Riyadh Player', 'Offlane for OG'],
+                    tags: ['Professional Dota 2 Player', 'Riyadh Player', 'Offlane for OG'],
                     description: 'Filipino Dota 2 offlaner recognized for impactful teamfight presence and international experience.',
                     followers: 24200,
                     kickLink: 'https://kick.com/nikkodota2',
@@ -330,7 +330,7 @@ export default {
                     id: 17,  
                     name: 'Skem',
                     nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 5 | Hard Support', 'TI Player', 'Riyadh Player', 'Hard Support for OG'],
+                    tags: ['Professional Dota 2 Player', 'TI Player', 'Riyadh Player', 'Hard Support for OG'],
                     description: 'Filipino Dota 2 support known for smart plays, solid vision control, and international experience.',
                     followers: 14700,
                     kickLink: 'https://kick.com/skemdota123',
@@ -339,7 +339,19 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/skem.jpg'
                 },{
-                    id: 18,  
+                    id: 18,
+                    name: 'Tims',
+                    nameIcon: '',
+                    tags: ['Professional Dota 2 Player', 'Major Champion', 'Top 7 TI', 'WESG Champion', 'Soft Support for OG'],
+                    description: 'Filipino Dota 2 mid player known for high-level mechanics and international success.',
+                    followers: 27200,
+                    kickLink: 'https://kick.com/timsdota',
+                    websiteLink: '',
+                    isLive: false,
+                    icon: 'fab fa-kickstarter',
+                    image: 'images/kukuys_streamer/tims.png'
+                },{
+                    id: 19,  
                     name: 'Jaunuel',
                     nameIcon: '',
                     tags: ['Professional Dota 2 Player', 'Position 5 | Hard Support', 'TI Player', 'Riyadh Player', ],
@@ -351,7 +363,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/jaunuel.png'
                 },{
-                    id: 19,  
+                    id: 20,  
                     name: 'Jing',
                     nameIcon: '',
                     tags: ['Professional Dota 2 Player', 'Position 5 | Hard Support', 'TI Player'],
@@ -363,7 +375,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/jing.jpg'
                 },{
-                    id: 20,  
+                    id: 21,  
                     name: 'JtzCast',
                     nameIcon: '',
                     tags: ['Professional Caster' , 'Dota 2 Streamer', 'Ex Manager of Team Kukuys', 'Kick Streamer'],
@@ -375,7 +387,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/jtz.jpg'
                 },{
-                    id: 21,  
+                    id: 22,  
                     name: 'Nevertheless',
                     nameIcon: '',
                     tags: ['Manager of Team Tekla' , 'Dota 2 Streamer', 'Kick Streamer'],
@@ -387,7 +399,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/kyle.jpg'
                 },{
-                    id: 22,  
+                    id: 23,  
                     name: 'LashSegway28',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Dota 2 Streamer', 'Dota 2 Caster'],
@@ -399,7 +411,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/lash.jpg'
                 },{
-                    id: 23,  
+                    id: 24,  
                     name: 'JaboleroDota',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Dota 2 Streamer', 'IRL Streamer'],
@@ -411,7 +423,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/jabolero.jpg'
                 },{
-                    id: 24,  
+                    id: 25,  
                     name: 'Hubrisss',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer', 'GTA RP Streamer'],
@@ -423,7 +435,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/hubris.png'
                 },{
-                    id: 25,  
+                    id: 26,  
                     name: 'Chupaeng',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer', 'GTA RP Streamer'],
@@ -435,7 +447,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/chupaeng.jpg'
                 },{
-                    id: 26,  
+                    id: 27,  
                     name: 'SunshineMelodyyy',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer', 'GTA RP Streamer'],
@@ -447,7 +459,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/sunshine.jpg'
                 },{
-                    id: 27,  
+                    id: 28,  
                     name: 'Joevy',
                     nameIcon: '',
                     tags: ['Dota 2 Streamer', 'Manager of Xctn'],
@@ -459,7 +471,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/joevy.png'
                 },{
-                    id: 28,  
+                    id: 29,  
                     name: 'RexhaScarlett',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer'],
@@ -471,7 +483,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/rexha.png'
                 },{
-                    id: 29,  
+                    id: 30,  
                     name: 'Sherickab',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer'],
@@ -483,7 +495,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/sherickab.jpg'
                 },{
-                    id: 30,  
+                    id: 31,  
                     name: 'Moodyemel',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer'],
@@ -495,7 +507,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/moodyemel.png'
                 },{
-                    id: 31,  
+                    id: 32,  
                     name: 'Aerein',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer'],
@@ -507,7 +519,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/ela.png'
                 },{
-                    id: 32,  
+                    id: 33,  
                     name: 'PeachyBunny',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer'],
