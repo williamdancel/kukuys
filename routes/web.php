@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
+use App\Http\Controllers\PartnerEnquiryController;
 
 Route::get('/', function () {
     return Inertia::render('Home');
@@ -34,6 +34,16 @@ Route::get('merch-store', function () {
 
 Route::get('admin-users', function () {
     return Inertia::render('AdminUsers');
-})->middleware(['auth', 'verified'])->name('admin-users');
+})->middleware(['auth', 'verified'])->name('admin-users');  
+
+// Public endpoint for submitting partner enquiries
+Route::post('/partner-enquiries', [PartnerEnquiryController::class, 'store']);
+
+// Protected API endpoints for managing partner enquiries
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/api/partner-enquiries', [PartnerEnquiryController::class, 'index']);
+    Route::delete('/api/partner-enquiries/{id}', [PartnerEnquiryController::class, 'destroy']);
+    Route::get('/api/partner-enquiries/statistics', [PartnerEnquiryController::class, 'statistics']);
+});
 
 require __DIR__.'/settings.php';
