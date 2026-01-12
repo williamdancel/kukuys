@@ -14,6 +14,8 @@
             </div>
             <div class="text-white">
                 <i class="fas fa-copyright mr-2"></i>2026 KUKUYS. All rights reserved.
+                <br>
+                Developed by Nextpagepls
             </div>
         </div>
     </footer>

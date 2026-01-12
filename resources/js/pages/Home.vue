@@ -37,7 +37,7 @@
             <FollowUs />
 
             <!-- Partner Section -->
-            <PartnerSection />
+            <PartnerEnquirySection />
 
             <!-- Footer -->
             <FooterSection />
@@ -54,7 +54,7 @@ import Navbar from '@/components/Home/Navbar.vue';
 import StreamerSection from '@/components/Home/StreamerSection.vue';
 import MerchSection from '@/components/Home/MerchSection.vue';
 import FollowUs from '@/components/Home/FollowUs.vue';
-import PartnerSection from '@/components/Home/PartnerSection.vue';
+import PartnerEnquirySection from '@/components/Home/PartnerEnquirySection.vue';
 import FooterSection from '@/components/Home/FooterSection.vue';
 import BackToTop from '@/components/Home/BackToTop.vue';
 export default {
@@ -77,7 +77,7 @@ export default {
         StreamerSection,
         MerchSection,
         FollowUs,
-        PartnerSection,
+        PartnerEnquirySection,
         FooterSection,
         BackToTop
     },

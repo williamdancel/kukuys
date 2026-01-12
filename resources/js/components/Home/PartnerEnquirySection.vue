@@ -22,19 +22,19 @@
                 <form @submit.prevent="submitPartnerForm" class="space-y-4">
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <input type="text" placeholder="Full Name" v-model="partnerForm.name" class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 transition-colors" required>
+                            <input type="text" placeholder="Full Name" maxlength="50" v-model="partnerForm.name" class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 transition-colors" required>
                         </div>
                         <div>
-                            <input type="email" placeholder="Email Address" v-model="partnerForm.email" class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 transition-colors" required>
+                            <input type="email" placeholder="Email Address" maxlength="50" v-model="partnerForm.email" class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 transition-colors" required>
                         </div>
                     </div>
                     <div>
-                        <input type="text" placeholder="Company Name" v-model="partnerForm.company" class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 transition-colors" required>
+                        <input type="text" placeholder="Company Name" maxlength="50" v-model="partnerForm.company" class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 transition-colors" required>
                     </div>
                     <div>
                         <textarea placeholder="Tell us about your partnership proposal" v-model="partnerForm.message" rows="4" class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 transition-colors resize-none" required></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-green-600 to-emerald-500 text-white py-3 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-600 transition-all transform hover:scale-105 flex items-center justify-center gap-2">
+                    <button type="submit" class="cursor-pointer w-full bg-gradient-to-r from-green-600 to-emerald-500 text-white py-3 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-600 transition-all transform hover:scale-105 flex items-center justify-center gap-2">
                         <i class="fas fa-paper-plane"></i>Submit Enquiry
                     </button>
                 </form>
