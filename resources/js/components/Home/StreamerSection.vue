@@ -37,7 +37,7 @@
                     </div>
                     
                     <!-- Profile Image -->
-                    <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 w-40 h-40 rounded-full border-4 border-gray-900 bg-gradient-to-br bg-white overflow-hidden group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-40 h-40 rounded-full border-4 border-gray-900 bg-gradient-to-br bg-white overflow-hidden group-hover:scale-110 transition-transform duration-500" style="top:50px;">
                         <!-- Profile Image with fallback icon -->
                         <img 
                             v-if="streamer.image" 
@@ -79,7 +79,7 @@
                     <div class="mb-6">
                         <div class="text-center">
                             <div class="text-2xl font-bold text-white">
-                                <i class="fas fa-users text-green-400 mr-1"></i>{{ formatNumber(streamer.followers) }}
+                                <i class="fas fa-users text-green-400 mr-1"></i> {{ formatNumber(streamer.followers) }}
                             </div>
                             <div class="text-sm text-gray-400">Kick Followers</div>
                         </div>
@@ -136,18 +136,6 @@ export default {
             streamers: [
                 {
                     id: 1,
-                    name: 'Gabbi',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 1 | Carry', 'Major Champion', 'TI Player', 'WESG Champion'],
-                    description: 'Filipino Dota 2 core player known for explosive teamfight impact and international success.',
-                    followers: 80800,
-                    kickLink: 'https://kick.com/gabbidoto',
-                    websiteLink: 'https://www.gabbidoto.com/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/gabbi.jpg'
-                },{
-                    id: 2,
                     name: 'Kuku',
                     nameIcon: '',
                     tags: ['GodFather of PH Dota 2','Professional Dota 2 Player', 'Position 5 | Hard Support', 'Top 7 TI', 'WESG Champion'],
@@ -158,6 +146,18 @@ export default {
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/kuku.jpg'
+                },{
+                    id: 2,
+                    name: 'Gabbi',
+                    nameIcon: '',
+                    tags: ['Professional Dota 2 Player', 'Position 1 | Carry', 'Major Champion', 'TI Player', 'WESG Champion'],
+                    description: 'Filipino Dota 2 core player known for explosive teamfight impact and international success.',
+                    followers: 80800,
+                    kickLink: 'https://kick.com/gabbidoto',
+                    websiteLink: 'https://www.gabbidoto.com/',
+                    isLive: false,
+                    icon: 'fab fa-kickstarter',
+                    image: 'images/kukuys_streamer/gabbi.jpg'
                 },{
                     id: 3,
                     name: 'Armel',
