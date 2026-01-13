@@ -421,7 +421,7 @@ export default {
                     websiteLink: '',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/jabolero.jpg'
+                    image: 'images/kukuys_streamer/jabolero.jpg?v=1'
                 },{
                     id: 25,  
                     name: 'Hubrisss',
