@@ -404,7 +404,7 @@ export default {
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Dota 2 Streamer', 'Dota 2 Caster'],
                     description: 'Content creator known for live commentary and variety gameplays.',
-                    followers: 17700,
+                    followers: 18600,
                     kickLink: 'https://kick.com/lashsegway28',
                     websiteLink: '',
                     isLive: false,
@@ -460,6 +460,18 @@ export default {
                     image: 'images/kukuys_streamer/sunshine.jpg'
                 },{
                     id: 28,  
+                    name: 'Jawocolet',
+                    nameIcon: '',
+                    tags: ['Kick Streamer', 'Variety Streamer'],
+                    description: 'Content creator known for variety gameplays, and engaging streams',
+                    followers: 4700,
+                    kickLink: 'https://kick.com/jawocolet',
+                    websiteLink: '',
+                    isLive: false,
+                    icon: 'fab fa-kickstarter',
+                    image: 'images/kukuys_streamer/jawo.jpg'
+                },{
+                    id: 29,  
                     name: 'Joevy',
                     nameIcon: '',
                     tags: ['Dota 2 Streamer', 'Manager of Xctn'],
@@ -471,7 +483,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/joevy.png'
                 },{
-                    id: 29,  
+                    id: 30,  
                     name: 'RexhaScarlett',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer'],
@@ -483,7 +495,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/rexha.png'
                 },{
-                    id: 30,  
+                    id: 31,  
                     name: 'Sherickab',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer'],
@@ -495,7 +507,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/sherickab.jpg'
                 },{
-                    id: 31,  
+                    id: 32,  
                     name: 'Moodyemel',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer'],
@@ -507,7 +519,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/moodyemel.png'
                 },{
-                    id: 32,  
+                    id: 33,  
                     name: 'Aerein',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer'],
@@ -519,7 +531,7 @@ export default {
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/ela.png'
                 },{
-                    id: 33,  
+                    id: 34,  
                     name: 'PeachyBunny',
                     nameIcon: '',
                     tags: ['Kick Streamer', 'Variety Streamer'],
@@ -530,6 +542,18 @@ export default {
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/peachy.png'
+                },{
+                    id: 35,  
+                    name: 'Rainzerlyn',
+                    nameIcon: '',
+                    tags: ['Professional Caster','Kick Streamer', 'Variety Streamer'],
+                    description: 'Content creator known for shoutcasting, variety gameplays, engaging streams, and community-driven content.',
+                    followers: 13600,
+                    kickLink: 'https://kick.com/rainzerlyn',
+                    websiteLink: '',
+                    isLive: false,
+                    icon: 'fab fa-kickstarter',
+                    image: 'images/kukuys_streamer/rainzerlyn.png'
                 }
                 
             ]

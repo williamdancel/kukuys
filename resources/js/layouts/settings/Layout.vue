@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useActiveUrl } from '@/composables/useActiveUrl';
 import { toUrl } from '@/lib/utils';
-import { edit as editAppearance } from '@/routes/appearance';
 import { edit as editProfile } from '@/routes/profile';
 import { show } from '@/routes/two-factor';
 import { edit as editPassword } from '@/routes/user-password';
@@ -23,11 +22,7 @@ const sidebarNavItems: NavItem[] = [
     {
         title: 'Two-Factor Auth',
         href: show(),
-    },
-    {
-        title: 'Appearance',
-        href: editAppearance(),
-    },
+    }
 ];
 
 const { urlIsActive } = useActiveUrl();
