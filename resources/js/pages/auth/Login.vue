@@ -24,6 +24,10 @@ defineProps<{
         title="Log in to your account"
         description=""
     >
+        <p class="text-red-500 text-sm text-center">Note: This feature is only available for Kukuys streamers.<br> 
+        Please do not log in your personal accounts on other platforms here.</p>
+        <p class="text-gray-500 text-center">Accounts are provided by nextpagepls <br> to Kukuys streamers via Discord PM. <br> (Please don't leak on stream)</p>
+        
         <Head title="Log in" />
 
         <div
@@ -96,6 +100,7 @@ defineProps<{
                     <Spinner v-if="processing" />
                     Log in
                 </Button>
+                <a href="/" class="text-center text-sm">Back to Website</a>
             </div>
         </Form>
     </AuthBase>

@@ -18,6 +18,7 @@ class TaryahanMatch extends Model
         'team_a_captain',
         'team_b_captain',
         'winner',
+        'game_type',
         'match_date',
     ];
 
@@ -90,7 +91,8 @@ class TaryahanMatch extends Model
             'team_b_players.*' => 'required|string|max:255',
             'team_a_captain' => 'required|string|max:255',
             'team_b_captain' => 'required|string|max:255',
-            'winner' => 'required|in:team_a,team_b',
+            'winner' => 'nullable|in:team_a,team_b',
+            'game_type' => 'required|in:dota2,cs2',
             'match_date' => 'required|date',
         ];
     }
@@ -105,6 +107,16 @@ class TaryahanMatch extends Model
             'team_b_players.size' => 'Team B must have exactly 5 players',
             'team_a_players.*.required' => 'Each Team A player name is required',
             'team_b_players.*.required' => 'Each Team B player name is required',
+        ];
+    }
+
+    /**
+     * Validation rules for updating winner
+     */
+    public static function winnerRules(): array
+    {
+        return [
+            'winner' => 'required|in:team_a,team_b', // Required only when updating
         ];
     }
 }

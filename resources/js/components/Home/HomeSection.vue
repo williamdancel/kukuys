@@ -33,6 +33,7 @@
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-4">Dota Pub Tracker</h3>
                             <p class="text-gray-300">Click here to to use Dota Pub Tracker</p>
+                            <p class="text-red-300 text-xs">Note: Only available for Kukuys Streamers</p>
                         </div>
                     </a>
 
@@ -44,6 +45,7 @@
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-4">CS2/Dota2 Taryahan</h3>
                             <p class="text-gray-300">Click here to to use CS2/Dota2 Tracker</p>
+                            <p class="text-red-300 text-xs">Note: Only available for Kukuys Streamers</p>
                         </div>
                     </a>
 
@@ -55,6 +57,7 @@
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-4">Facebook Community</h3>
                             <p class="text-gray-300">Join thousands of dedicated fans</p>
+                            <p class="text-green-300 text-xs">Join the Kukuys Facebook group now.</p>
                         </div>
                     </a>
                 </div>

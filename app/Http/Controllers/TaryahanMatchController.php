@@ -53,6 +53,9 @@ class TaryahanMatchController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), TaryahanMatch::rules(), TaryahanMatch::messages());
@@ -88,6 +91,9 @@ class TaryahanMatchController extends Controller
                     ],
                 ], 422);
             }
+            
+            // Winner can be null initially
+            $data['winner'] = $data['winner'] ?? null;
             
             $match = $this->matchService->createMatch($data);
 
@@ -167,9 +173,8 @@ class TaryahanMatchController extends Controller
      */
     public function updateWinner(Request $request, int $id): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'winner' => 'required|in:team_a,team_b',
-        ]);
+        // Use winner-specific validation rules
+        $validator = Validator::make($request->all(), TaryahanMatch::winnerRules());
 
         if ($validator->fails()) {
             return response()->json([

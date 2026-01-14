@@ -57,6 +57,9 @@ const isEditing = ref(false);
 const formErrors = ref<Record<string, string[]>>({});
 const submitting = ref(false);
 
+// How-to-use modal state
+const showHelpModal = ref(false);
+
 // Delete confirmation
 const showDeleteConfirm = ref(false);
 const deleteId = ref<number | null>(null);
@@ -152,11 +155,11 @@ const validateForm = () => {
         errors.total_pubs = ['Total pubs must be greater than 0'];
     }
     
-    if (!form.value.win || parseInt(form.value.win) < 0) {
+    if ((parseInt(form.value.win) == 0 && form.value.win !== '' && form.value.win !== null && parseInt(form.value.total_pubs) < 1) || parseInt(form.value.win) < 0) {
         errors.win = ['Win count cannot be negative'];
     }
-    
-    if (!form.value.lose || parseInt(form.value.lose) < 0) {
+
+    if ((parseInt(form.value.lose) == 0 && form.value.lose !== '' && form.value.lose !== null && parseInt(form.value.total_pubs) < 1) || parseInt(form.value.lose) < 0) {
         errors.lose = ['Lose count cannot be negative'];
     }
     
@@ -278,6 +281,17 @@ onMounted(() => {
                     <h1 class="text-2xl font-bold text-gray-900">Dota Pub Tracker</h1>
                     <p class="text-gray-600">Track your Dota 2 pub match statistics</p>
                 </div>
+
+                <!-- Help Modal Trigger -->
+                <button
+                    @click="showHelpModal = true"
+                    class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center gap-2"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    How to use Dota Pub Tracker?
+                </button>
                 <button
                     @click="openCreateForm"
                     class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
@@ -418,6 +432,126 @@ onMounted(() => {
             </div>
         </div>
 
+        <!-- How-to-use Modal -->
+        <Teleport to="body">
+            <Transition
+                enter-active-class="transition ease-out duration-200"
+                enter-from-class="opacity-0"
+                enter-to-class="opacity-100"
+                leave-active-class="transition ease-in duration-150"
+                leave-from-class="opacity-100"
+                leave-to-class="opacity-0"
+            >
+                <div v-if="showHelpModal" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" @click="showHelpModal = false">
+                    <Transition
+                        enter-active-class="transition ease-out duration-200"
+                        enter-from-class="opacity-0 scale-95"
+                        enter-to-class="opacity-100 scale-100"
+                        leave-active-class="transition ease-in duration-150"
+                        leave-from-class="opacity-100 scale-100"
+                        leave-to-class="opacity-0 scale-95"
+                    >
+                        <div v-if="showHelpModal" class="bg-white rounded-xl shadow-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto" @click.stop>
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-900">
+                                        How to Use Dota Pub Tracker
+                                    </h2>
+                                    <p class="text-sm text-gray-500 mt-1">A quick guide to tracking your Dota 2 pub match statistics</p>
+                                </div>
+                                <button 
+                                    @click="showHelpModal = false" 
+                                    class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-lg hover:bg-gray-100"
+                                >
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <!-- Video Player -->
+                            <div class="mb-6">
+                                <div class="aspect-video bg-gray-900 rounded-lg overflow-hidden">
+                                    <video 
+                                        controls 
+                                        class="w-full h-full"
+                                    >
+                                        <!-- Add multiple video formats for better browser compatibility -->
+                                        <source src="/videos/dota-pub-tracker-tutorial.mp4" type="video/mp4">
+                                        <p class="p-4 text-white text-center">
+                                            Your browser doesn't support HTML5 video. 
+                                            <a href="/videos/dota-pub-tracker-tutorial.mp4" class="text-blue-400 underline">Download the video</a> instead.
+                                        </p>
+                                    </video>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2 text-center">Dota Pub Tracker Tutorial Video</p>
+                            </div>
+                            
+                            <!-- Quick Steps -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-3">
+                                        <span class="text-blue-600 font-bold">1</span>
+                                    </div>
+                                    <h3 class="font-semibold text-gray-900 mb-2">Add Records</h3>
+                                    <p class="text-sm text-gray-600">Click "Add New Record" to start tracking your pub matches. Fill in the player name, total pubs, wins, losses, and match date.</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mb-3">
+                                        <span class="text-green-600 font-bold">2</span>
+                                    </div>
+                                    <h3 class="font-semibold text-gray-900 mb-2">Track Progress</h3>
+                                    <p class="text-sm text-gray-600">View your win rates, filter records by date or name, and monitor your pub match statistics over time.</p>
+                                </div>
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mb-3">
+                                        <span class="text-purple-600 font-bold">3</span>
+                                    </div>
+                                    <h3 class="font-semibold text-gray-900 mb-2">Manage Data</h3>
+                                    <p class="text-sm text-gray-600">Edit or delete records as needed. The system automatically calculates win rates and provides insights.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Tips Section -->
+                            <div class="border-t border-gray-200 pt-6">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-3">Tips & Best Practices</h3>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        <span>Always ensure that Win + Loss = Total Pubs for accurate statistics</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        <span>Use the date filters to analyze your performance over specific periods</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        <span>Regularly update your records to get the most accurate win rate calculations</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Modal Actions -->
+                            <div class="flex gap-3 pt-6 border-t border-gray-200">
+                                <button
+                                    @click="showHelpModal = false"
+                                    class="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                                >
+                                    Got it, thanks!
+                                </button>
+                            </div>
+                        </div>
+                    </Transition>
+                </div>
+            </Transition>
+        </Teleport>
+
         <!-- Create/Edit Modal -->
         <Teleport to="body">
             <Transition
@@ -437,7 +571,7 @@ onMounted(() => {
                         leave-from-class="opacity-100 scale-100"
                         leave-to-class="opacity-0 scale-95"
                     >
-                        <div v-if="showFormModal" class="bg-white rounded-xl shadow-2xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto" @click.stop>
+                        <div v-if="showFormModal" class="bg-white rounded-xl shadow-2xl p-6 max-w-xl w-full max-h-[90vh] overflow-y-auto" @click.stop>
                             <div class="flex justify-between items-start mb-6">
                                 <div>
                                     <h2 class="text-2xl font-bold text-gray-900">

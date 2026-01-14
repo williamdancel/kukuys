@@ -234,7 +234,7 @@ export default {
                     id: 9,  
                     name: 'Jwl',
                     nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 5 | Hard Support', 'Position 4 | Soft Support'],
+                    tags: ['Professional Dota 2 Player', 'Position 5 | Hard Support'],
                     description: 'Filipino Dota 2 rising star recognized for skillful plays and versatile support roles.',
                     followers: 28600,
                     kickLink: 'https://kick.com/jwldota',
