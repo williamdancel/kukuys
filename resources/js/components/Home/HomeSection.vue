@@ -25,32 +25,38 @@
             <!-- Features Section -->
             <div class="container mx-auto px-6 pb-30">
                 <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Pro Players Card -->
-                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 hover:border-red-500 transition-all hover:transform hover:scale-105">
-                        <div class="text-red-500 mb-4">
-                            <i class="fas fa-trophy fa-3x mx-auto"></i>
+                    <!-- Dota Pub Tracker -->
+                    <a href="/dota-pub-tracker" rel="noopener noreferrer">
+                        <div class="cursor-pointer bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 hover:border-red-500 transition-all hover:transform hover:scale-105">
+                            <div class="text-red-500 mb-4">
+                                <i class="fas fa-trophy fa-3x mx-auto"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Dota Pub Tracker</h3>
+                            <p class="text-gray-300">Click here to to use Dota Pub Tracker</p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-4">Pro Players</h3>
-                        <p class="text-gray-300">Tournament winners & Dota 2 legends</p>
-                    </div>
+                    </a>
 
-                    <!-- Daily Streams Card -->
-                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 hover:border-yellow-500 transition-all hover:transform hover:scale-105">
-                        <div class="text-yellow-500 mb-4">
-                            <i class="fas fa-play fa-3x mx-auto"></i>
+                    <!-- CS2/Dota2 Taryahan -->
+                    <a href="/taryahan" rel="noopener noreferrer">
+                        <div class="cursor-pointer bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 hover:border-yellow-500 transition-all hover:transform hover:scale-105">
+                            <div class="text-yellow-500 mb-4">
+                                <i class="fas fa-trophy fa-3x mx-auto"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">CS2/Dota2 Taryahan</h3>
+                            <p class="text-gray-300">Click here to to use CS2/Dota2 Tracker</p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-4">Daily Streams</h3>
-                        <p class="text-gray-300">Live gameplay & entertainment 24/7</p>
-                    </div>
+                    </a>
 
                     <!-- Community Card -->
-                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 hover:border-blue-500 transition-all hover:transform hover:scale-105">
-                        <div class="text-blue-500 mb-4">
-                            <i class="fas fa-users fa-3x mx-auto"></i>
+                    <a href="https://www.facebook.com/groups/1681540276075430" target="_blank" rel="noopener noreferrer">
+                        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 hover:border-blue-500 transition-all hover:transform hover:scale-105">
+                            <div class="text-blue-500 mb-4">
+                                <i class="fas fa-users fa-3x mx-auto"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Facebook Community</h3>
+                            <p class="text-gray-300">Join thousands of dedicated fans</p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-4">Community</h3>
-                        <p class="text-gray-300">Join thousands of dedicated fans</p>
-                    </div>
+                    </a>
                 </div>
             </div>
     </section>
