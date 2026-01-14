@@ -210,7 +210,7 @@ export default {
                     id: 7,  
                     name: 'Kokz',
                     nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 2 | Midlaner'],
+                    tags: ['Professional Dota 2 Player', 'Position 3 | Offlane'],
                     description: 'Filipino Dota 2 rising star recognized for game-changing impact.',
                     followers: 39400,
                     kickLink: 'https://kick.com/kokzdota',
