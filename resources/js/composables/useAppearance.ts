@@ -1,6 +1,6 @@
 import { computed, onMounted, ref } from 'vue';
 
-export type ResolvedAppearance = 'light' | 'dark';
+export type ResolvedAppearance = 'light' | 'light';
 type Appearance = ResolvedAppearance | 'system';
 
 export function updateTheme(value: Appearance) {
@@ -10,16 +10,16 @@ export function updateTheme(value: Appearance) {
 
     if (value === 'system') {
         const mediaQueryList = window.matchMedia(
-            '(prefers-color-scheme: dark)',
+            '(prefers-color-scheme: light)',
         );
-        const systemTheme = mediaQueryList.matches ? 'dark' : 'light';
+        const systemTheme = mediaQueryList.matches ? 'light' : 'light';
 
         document.documentElement.classList.toggle(
-            'dark',
-            systemTheme === 'dark',
+            'light',
+            systemTheme === 'light',
         );
     } else {
-        document.documentElement.classList.toggle('dark', value === 'dark');
+        document.documentElement.classList.toggle('light', value === 'light');
     }
 }
 
@@ -38,7 +38,7 @@ const mediaQuery = () => {
         return null;
     }
 
-    return window.matchMedia('(prefers-color-scheme: dark)');
+    return window.matchMedia('(prefers-color-scheme: light)');
 };
 
 const getStoredAppearance = () => {
@@ -49,12 +49,12 @@ const getStoredAppearance = () => {
     return localStorage.getItem('appearance') as Appearance | null;
 };
 
-const prefersDark = (): boolean => {
+const preferslight = (): boolean => {
     if (typeof window === 'undefined') {
         return false;
     }
 
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return window.matchMedia('(prefers-color-scheme: light)').matches;
 };
 
 const handleSystemThemeChange = () => {
@@ -70,7 +70,7 @@ export function initializeTheme() {
 
     // Initialize theme from saved preference or default to system...
     const savedAppearance = getStoredAppearance();
-    updateTheme(savedAppearance || 'system');
+    updateTheme(savedAppearance || 'light');
 
     // Set up system theme change listener...
     mediaQuery()?.addEventListener('change', handleSystemThemeChange);
@@ -91,7 +91,7 @@ export function useAppearance() {
 
     const resolvedAppearance = computed<ResolvedAppearance>(() => {
         if (appearance.value === 'system') {
-            return prefersDark() ? 'dark' : 'light';
+            return preferslight() ? 'light' : 'light';
         }
 
         return appearance.value;
