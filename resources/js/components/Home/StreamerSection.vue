@@ -43,6 +43,7 @@
                             v-if="streamer.image" 
                             :src="streamer.image" 
                             :alt="streamer.name"
+                            loading="lazy"
                             class="w-full h-full object-cover"
                         >
                         <div v-else class="w-full h-full bg-gradient-to-br from-green-400 to-emerald-300 flex items-center justify-center text-5xl font-bold text-gray-900">
