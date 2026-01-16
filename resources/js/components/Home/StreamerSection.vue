@@ -86,21 +86,33 @@
                     </div>
 
                     <!-- Links -->
-                    <div class="flex justify-center gap-3">
-                        <a 
-                            :href="streamer.kickLink" 
-                            target="_blank" 
-                            class="flex-1 w-full bg-gradient-to-r from-green-600 to-emerald-500 text-white py-3 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 cursor-pointer"
-                        >
-                            <i class="fab fa-kickstarter"></i>Kick Stream
-                        </a>
+                    <div class="flex flex-col sm:flex-row justify-center gap-3">
                         <a 
                             v-show="streamer.websiteLink"
                             :href="streamer.websiteLink" 
                             target="_blank" 
                             class="flex-1 w-full bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 text-white py-3 rounded-lg font-semibold hover:border-green-500 hover:from-gray-900 hover:to-black transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 cursor-pointer"
                         >
-                            <i class="fas fa-globe"></i>Website
+                            <i class="fas fa-globe"></i>
+                            <span>Website</span>
+                        </a>
+                        <a 
+                            :href="streamer.kickLink" 
+                            target="_blank" 
+                            class="flex-1 w-full bg-gradient-to-r from-green-600 to-emerald-500 text-white py-3 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 cursor-pointer"
+                        >
+                            <i class="fab fa-kickstarter"></i>
+                            <span class="hidden sm:inline">Kick Stream</span>
+                            <span class="sm:hidden">Kick</span>
+                        </a>
+                        <a 
+                            v-show="streamer.facebookLink"
+                            :href="streamer.facebookLink" 
+                            target="_blank" 
+                            class="flex-1 w-full bg-gradient-to-r from-blue-800 to-blue-900 border border-gray-700 text-white py-3 rounded-lg font-semibold hover:border-green-500 hover:from-gray-900 hover:to-black transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 cursor-pointer"
+                        >
+                            <i class="fa-brands fa-facebook-f"></i>
+                            <span>Facebook</span>
                         </a>
                     </div>
                 </div>
@@ -143,6 +155,7 @@ export default {
                     followers: 69000,
                     kickLink: 'https://kick.com/kukudota2',
                     websiteLink: 'https://www.kukudota2.com/',
+                    facebookLink: 'https://www.facebook.com/gaming/KukuDota.Official',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/kuku.jpg'
@@ -155,6 +168,7 @@ export default {
                     followers: 80800,
                     kickLink: 'https://kick.com/gabbidoto',
                     websiteLink: 'https://www.gabbidoto.com/',
+                    facebookLink: 'https://www.facebook.com/Gabbidoto',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/gabbi.jpg'
@@ -167,6 +181,7 @@ export default {
                     followers: 66600,
                     kickLink: 'https://kick.com/armeldoto',
                     websiteLink: 'https://armeldota.com/',
+                    facebookLink: 'https://www.facebook.com/armeldoto/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/armel.png'
@@ -179,6 +194,7 @@ export default {
                     followers: 33900,
                     kickLink: 'https://kick.com/djdoto',
                     websiteLink: 'https://djdota.com/',
+                    facebookLink: 'https://www.facebook.com/djdoto',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/dj.jpg'
@@ -186,11 +202,12 @@ export default {
                     id: 5,  
                     name: 'Yowe',
                     nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 2 | Midlaner', 'IRL Streamer'],
+                    tags: ['Professional Dota 2 Player', 'Position 2 | Midlaner', 'Chosen Bai'],
                     description: 'Filipino Dota 2 midlaner recognized for fearless plays and game-changing impact in high-level matches.',
                     followers: 60800,
                     kickLink: 'https://kick.com/yowe',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/yoweDotes',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/yowe.jpg'
@@ -203,6 +220,7 @@ export default {
                     followers: 36100,
                     kickLink: 'https://kick.com/solapsapdota',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/PalosDota/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/palos.jpg'
@@ -215,6 +233,7 @@ export default {
                     followers: 39400,
                     kickLink: 'https://kick.com/kokzdota',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/Kokzdoto/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/kokz.png'
@@ -227,9 +246,10 @@ export default {
                     followers: 41600,
                     kickLink: 'https://kick.com/abatdota',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/Abatdota/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/abat.jpg'
+                    image: 'images/kukuys_streamer/abat.png'
                 },{
                     id: 9,  
                     name: 'Jwl',
@@ -239,6 +259,7 @@ export default {
                     followers: 28600,
                     kickLink: 'https://kick.com/jwldota',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/jwldota/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/jwl.jpg'
@@ -251,6 +272,7 @@ export default {
                     followers: 15500,
                     kickLink: 'https://kick.com/tinodota',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/dota2tino',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/tino.jpg'
@@ -263,6 +285,7 @@ export default {
                     followers: 39100,
                     kickLink: 'https://kick.com/karldotaa',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/KarlDota.Official',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/karl.jpg'
@@ -275,6 +298,7 @@ export default {
                     followers: 18500,
                     kickLink: 'https://kick.com/jgdota',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/JGdota2',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/jg.png'
@@ -287,6 +311,7 @@ export default {
                     followers: 20000,
                     kickLink: 'https://kick.com/sepdoto',
                     websiteLink: 'https://www.sepdoto.com/',
+                    facebookLink: 'https://www.facebook.com/sepdoto',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/sep.png'
@@ -299,6 +324,7 @@ export default {
                     followers: 11100,
                     kickLink: 'https://kick.com/lewisdotaa',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/profile.php?id=61578067661034',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/lewis.jpg'
@@ -311,6 +337,7 @@ export default {
                     followers: 33600,
                     kickLink: 'https://kick.com/natsumidota',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/natsumidota/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/natsumi.jpg'
@@ -323,6 +350,7 @@ export default {
                     followers: 24200,
                     kickLink: 'https://kick.com/nikkodota2',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/NikkoForce/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/nikko.jpg'
@@ -335,6 +363,7 @@ export default {
                     followers: 14700,
                     kickLink: 'https://kick.com/skemdota123',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/skemdota/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/skem.jpg'
@@ -347,6 +376,7 @@ export default {
                     followers: 27200,
                     kickLink: 'https://kick.com/timsdota',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/timsdotaofficial',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/tims.png'
@@ -359,6 +389,7 @@ export default {
                     followers: 29000,
                     kickLink: 'https://kick.com/jaunueldota',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/JaunuelGaming/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/jaunuel.png'
@@ -371,6 +402,7 @@ export default {
                     followers: 22700,
                     kickLink: 'https://kick.com/jingdota',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/p/Jingdota-100082864195706/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/jing.jpg'
@@ -383,6 +415,7 @@ export default {
                     followers: 18400,
                     kickLink: 'https://kick.com/jtzcast',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/Jettezee/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/jtz.jpg'
@@ -395,6 +428,7 @@ export default {
                     followers: 19100,
                     kickLink: 'https://kick.com/nevertheless',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/neverthelessdota/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/kyle.jpg'
@@ -407,6 +441,7 @@ export default {
                     followers: 18600,
                     kickLink: 'https://kick.com/lashsegway28',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/Lashsegway28/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/lash.jpg'
@@ -419,6 +454,7 @@ export default {
                     followers: 12100,
                     kickLink: 'https://kick.com/jabolerodota',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/Jabolerodota/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/jabolero.jpg?v=1'
@@ -431,6 +467,7 @@ export default {
                     followers: 23600,
                     kickLink: 'https://kick.com/hubrisss',
                     websiteLink: '',
+                    facebookLink: '',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/hubris.png'
@@ -443,6 +480,7 @@ export default {
                     followers: 15300,
                     kickLink: 'https://kick.com/chupaeng',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/p/Chupaeng-100092376301513/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/chupaeng.jpg'
@@ -455,6 +493,7 @@ export default {
                     followers: 18000,
                     kickLink: 'https://kick.com/sunshinemelodyyy',
                     websiteLink: 'https://sunshinemelody.com/',
+                    facebookLink: 'https://www.facebook.com/ItsJoannaGaming/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/sunshine.jpg'
@@ -467,6 +506,7 @@ export default {
                     followers: 4700,
                     kickLink: 'https://kick.com/jawocolet',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/jawocolet/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/jawo.jpg'
@@ -479,6 +519,7 @@ export default {
                     followers: 11100,
                     kickLink: 'https://kick.com/joevydota2',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/physicsjoevy/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/joevy.png'
@@ -491,6 +532,7 @@ export default {
                     followers: 5800,
                     kickLink: 'https://kick.com/rexhascarlett',
                     websiteLink: '',
+                    facebookLink: '',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/rexha.png'
@@ -503,6 +545,7 @@ export default {
                     followers: 9400,
                     kickLink: 'https://kick.com/sherickab',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/onlyshericka/',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/sherickab.jpg'
@@ -515,6 +558,7 @@ export default {
                     followers: 4100,
                     kickLink: 'https://kick.com/moodyemel',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/Bananabreiva',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/moodyemel.png'
@@ -527,6 +571,7 @@ export default {
                     followers: 7400,
                     kickLink: 'https://kick.com/aerein',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/elainecuares',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/ela.png'
@@ -539,6 +584,7 @@ export default {
                     followers: 7900,
                     kickLink: 'https://kick.com/peachybunny',
                     websiteLink: '',
+                    facebookLink: '',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/peachy.png'
@@ -547,10 +593,11 @@ export default {
                     name: 'Rainzerlyn',
                     nameIcon: '',
                     tags: ['Professional Caster','Kick Streamer', 'Variety Streamer'],
-                    description: 'Content creator known for shoutcasting, variety gameplays, engaging streams, and community-driven content.',
+                    description: 'Content creator known for shoutcasting, engaging streams, and community-driven content.',
                     followers: 13600,
                     kickLink: 'https://kick.com/rainzerlyn',
                     websiteLink: '',
+                    facebookLink: 'https://www.facebook.com/statsgirlrain',
                     isLive: false,
                     icon: 'fab fa-kickstarter',
                     image: 'images/kukuys_streamer/rainzerlyn.png'
