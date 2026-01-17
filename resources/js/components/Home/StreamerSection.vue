@@ -64,9 +64,9 @@
                             <span class="animate-pulse">🔴</span>
                             <span>
                                 LIVE
-                                <span v-if="streamer.viewers">
+                                <!-- <span v-if="streamer.viewers">
                                     ({{ formatNumber(streamer.viewers) }})
-                                </span>
+                                </span> -->
                             </span>
                         </div>
                     </div>
