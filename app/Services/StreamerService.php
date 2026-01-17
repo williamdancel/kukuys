@@ -551,6 +551,21 @@ class StreamerService
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
                 'image' => 'images/kukuys_streamer/rainzerlyn.png'
+            ],
+            [
+                'id' => 35,
+                'name' => 'Meepwet',
+                'kickUsername' => 'meepwet',
+                'nameIcon' => '',
+                'tags' => ['Dota 2 Streamer', 'Kick Streamer', 'Variety Streamer', 'Akatsuki', 'PH Sniper'],
+                'description' => 'Dota 2 streamer known for competitive gameplay, engaging streams, and community-driven content.',
+                'followers' => 6700,
+                'kickLink' => 'https://kick.com/meepwet',
+                'websiteLink' => '',
+                'facebookLink' => 'https://www.facebook.com/meepwetgaming',
+                'isLive' => false,
+                'icon' => 'fab fa-kickstarter',
+                'image' => 'images/kukuys_streamer/meepwet.jpg'
             ]
         ];
     }
