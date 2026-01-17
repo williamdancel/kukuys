@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\PartnerEnquiryController;
 use App\Http\Controllers\DotaPubRecordController;
 use App\Http\Controllers\TaryahanMatchController;
+use App\Http\Controllers\StreamerController;
 
 Route::get('/', function () {
     return Inertia::render('Home');
@@ -61,5 +62,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/api/taryahan/matches/{id}', [TaryahanMatchController::class, 'updateWinner']);
     Route::delete('/api/taryahan/matches/{id}', [TaryahanMatchController::class, 'destroy']);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Streamer Live Status Routes
+|--------------------------------------------------------------------------
+*/
+
+// Public Streamer Endpoints (No Authentication Required)
+Route::prefix('api/streamers')->name('api.streamers.')->group(function () {
+
+    // Get detailed streamer information
+    Route::get('/detailed', [StreamerController::class, 'getStreamersWithDetails'])
+        ->name('detailed');
+});
+
 
 require __DIR__.'/settings.php';

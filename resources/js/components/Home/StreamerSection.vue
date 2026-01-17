@@ -10,35 +10,68 @@
             <p class="text-gray-300 text-lg max-w-3xl mx-auto">
                 The best Dota 2 professionals and Kick streamers in the scene
             </p>
+            
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mt-8">
+                <button 
+                    @click="filterType = 'all'"
+                    :class="filterType === 'all' ? 'from-green-600 to-emerald-500' : 'from-gray-700 to-gray-800'"
+                    class="bg-gradient-to-r text-white px-6 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center gap-2"
+                >
+                    <i class="fas fa-users"></i>
+                    All Kukuys ({{ streamers.length }})
+                </button>
+                <button 
+                    @click="filterType = 'live'"
+                    :class="filterType === 'live' ? 'from-green-600 to-emerald-500' : 'from-gray-700 to-gray-800'"
+                    class="bg-gradient-to-r text-white px-6 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center gap-2 relative"
+                >
+                    <i class="fas fa-circle text-xs animate-pulse"></i>
+                    Live Now ({{ liveCount }})
+                    <span v-if="isCheckingLiveStatus" class="absolute -top-1 -right-1">
+                        <i class="fas fa-sync fa-spin text-xs"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div v-if="isLoading" class="text-center py-12">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mb-4"></div>
+            <p class="text-gray-300">Loading Kukuys...</p>
         </div>
 
         <!-- Streamers Grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Dynamic Streamer Cards -->
-            <div 
-                v-for="streamer in visibleStreamers" 
+        <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+                v-for="streamer in visibleStreamers"
                 :key="streamer.id"
-                class="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700 hover:border-green-500 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-green-500/10"
+                :class="[
+                    'group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border transition-all duration-500',
+                    streamer.isLive
+                    ? 'border-red-500 shadow-red-500/30 animate-live-glow'
+                    : 'border-gray-700 hover:border-green-500'
+                ]"
             >
-                <!-- Card Background Glow -->
                 <div class="absolute bg-gradient-to-br from-green-500/5 via-transparent to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
-                <!-- Streamer Image -->
                 <div class="relative h-64 overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-br from-green-600/30 to-emerald-500/30"></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent"></div>
                     
-                    <!-- Live Status Badge -->
                     <div v-if="streamer.isLive" class="absolute top-4 right-4 z-10">
-                        <div class="flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-                            <i class="fas fa-circle text-xs animate-pulse"></i>
-                            <span>LIVE</span>
+                        <div class="flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                            <span class="animate-pulse">🔴</span>
+                            <span>
+                                LIVE
+                                <span v-if="streamer.viewers">
+                                    ({{ formatNumber(streamer.viewers) }})
+                                </span>
+                            </span>
                         </div>
                     </div>
                     
-                    <!-- Profile Image -->
                     <div class="absolute left-1/2 transform -translate-x-1/2 w-40 h-40 rounded-full border-4 border-gray-900 bg-gradient-to-br bg-white overflow-hidden group-hover:scale-110 transition-transform duration-500" style="top:50px;">
-                        <!-- Profile Image with fallback icon -->
                         <img 
                             v-if="streamer.image" 
                             :src="streamer.image" 
@@ -52,9 +85,7 @@
                     </div>
                 </div>
 
-                <!-- Streamer Info -->
                 <div class="pt-20 pb-6 px-6">
-                    <!-- Name and Role -->
                     <div class="text-center mb-4 min-h-[111px]">
                         <h3 class="text-2xl font-bold text-white mb-3">
                             <i :class="streamer.nameIcon" class="mr-2"></i>{{ streamer.name }}
@@ -70,13 +101,11 @@
                         </div>
                     </div>
 
-                    <!-- Description -->
                     <p class="text-gray-300 text-center mb-6 line-clamp-3">
                         <i class="fas fa-quote-left text-green-400 mr-2 opacity-50"></i>
                         {{ streamer.description }}
                     </p>
 
-                    <!-- Stats -->
                     <div class="mb-6">
                         <div class="text-center">
                             <div class="text-2xl font-bold text-white">
@@ -86,7 +115,6 @@
                         </div>
                     </div>
 
-                    <!-- Links -->
                     <div class="flex flex-col sm:flex-row justify-center gap-3">
                         <a 
                             v-show="streamer.websiteLink"
@@ -120,8 +148,7 @@
             </div>
         </div>
 
-        <!-- See More / Show Less Button -->
-        <div class="text-center mt-12">
+        <div v-if="!isLoading" class="text-center mt-12">
             <button 
                 v-if="showMoreButtonVisible"
                 @click="toggleShowMore"
@@ -131,495 +158,81 @@
                 <i class="fas" :class="showMore ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
             </button>
             
-            <!-- Streamer Counter -->
             <p class="text-gray-400 mt-4 text-sm">
-                Showing {{ visibleStreamers.length }} of {{ streamers.length }} streamers
+                Showing {{ visibleStreamers.length }} of {{ filteredStreamers.length }} streamers
             </p>
+        </div>
+
+        <!-- Error State -->
+        <div v-if="error" class="text-center py-12">
+            <div class="text-red-400 mb-4">
+                <i class="fas fa-exclamation-triangle text-4xl"></i>
+            </div>
+            <p class="text-gray-300 mb-4">Error loading streamers: {{ error }}</p>
+            <button 
+                @click="fetchStreamersFromAPI"
+                class="bg-gradient-to-r from-green-600 to-emerald-500 text-white px-6 py-2 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-600 transition-all transform hover:scale-105"
+            >
+                <i class="fas fa-sync mr-2"></i> Retry
+            </button>
         </div>
     </section>
 </template>
 
 <script lang="ts">
+import axios from 'axios';
+
+interface Streamer {
+    id: number;
+    name: string;
+    kickUsername: string;
+    nameIcon: string;
+    tags: string[];
+    description: string;
+    followers: number;
+    kickLink: string;
+    websiteLink: string;
+    facebookLink: string;
+    isLive: boolean;
+    viewers?: number;
+    icon: string;
+    image: string;
+}
+
 export default {
     name: 'StreamerSection',
     data() {
         return {
             showMore: false,
             itemsPerLoad: 6,
-            streamers: [
-                {
-                    id: 1,
-                    name: 'Kuku',
-                    nameIcon: '',
-                    tags: ['GodFather of PH Dota 2','Professional Dota 2 Player', 'Position 5 | Hard Support', 'Top 7 TI', 'WESG Champion'],
-                    description: 'Veteran Filipino Dota 2 captain known for elite leadership, strong shot-calling, and international success.',
-                    followers: 69000,
-                    kickLink: 'https://kick.com/kukudota2',
-                    websiteLink: 'https://www.kukudota2.com/',
-                    facebookLink: 'https://www.facebook.com/gaming/KukuDota.Official',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/kuku.jpg'
-                },{
-                    id: 2,
-                    name: 'Gabbi',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 1 | Carry', 'Major Champion', 'TI Player', 'WESG Champion'],
-                    description: 'Filipino Dota 2 core player known for explosive teamfight impact and international success.',
-                    followers: 80800,
-                    kickLink: 'https://kick.com/gabbidoto',
-                    websiteLink: 'https://www.gabbidoto.com/',
-                    facebookLink: 'https://www.facebook.com/Gabbidoto',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/gabbi.jpg'
-                },{
-                    id: 3,
-                    name: 'Armel',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 2 | Midlaner', 'Major Champion', 'TI Player', 'WESG Champion'],
-                    description: 'Filipino Dota 2 mid player known for high-level mechanics and international success.',
-                    followers: 66600,
-                    kickLink: 'https://kick.com/armeldoto',
-                    websiteLink: 'https://armeldota.com/',
-                    facebookLink: 'https://www.facebook.com/armeldoto/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/armel.png'
-                },{
-                    id: 4,
-                    name: 'DJ',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 4 | Soft Support', 'Top 4 TI'],
-                    description: 'Veteran Filipino Dota 2 support known for clutch saves, high game sense, and international success.',
-                    followers: 33900,
-                    kickLink: 'https://kick.com/djdoto',
-                    websiteLink: 'https://djdota.com/',
-                    facebookLink: 'https://www.facebook.com/djdoto',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/dj.jpg'
-                },{
-                    id: 5,  
-                    name: 'Yowe',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 2 | Midlaner', 'Chosen Bai'],
-                    description: 'Filipino Dota 2 midlaner recognized for fearless plays and game-changing impact in high-level matches.',
-                    followers: 60800,
-                    kickLink: 'https://kick.com/yowe',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/yoweDotes',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/yowe.jpg'
-                },{
-                    id: 6,  
-                    name: 'Palos',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 1 | Carry', 'Riyadh Player'],
-                    description: 'Filipino Dota 2 carry known for sharp mechanics, aggressive plays, and international experience.',
-                    followers: 36100,
-                    kickLink: 'https://kick.com/solapsapdota',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/PalosDota/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/palos.jpg'
-                },{
-                    id: 7,  
-                    name: 'Kokz',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 3 | Offlane'],
-                    description: 'Filipino Dota 2 rising star recognized for game-changing impact.',
-                    followers: 39400,
-                    kickLink: 'https://kick.com/kokzdota',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/Kokzdoto/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/kokz.png'
-                },{
-                    id: 8,  
-                    name: 'Abat',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 1 | Carry', 'Dota 2 Caster'],
-                    description: 'Filipino Dota 2 rising star recognized for aggressive plays and clutch impact.',
-                    followers: 41600,
-                    kickLink: 'https://kick.com/abatdota',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/Abatdota/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/abat.png'
-                },{
-                    id: 9,  
-                    name: 'Jwl',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 5 | Hard Support'],
-                    description: 'Filipino Dota 2 rising star recognized for skillful plays and versatile support roles.',
-                    followers: 28600,
-                    kickLink: 'https://kick.com/jwldota',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/jwldota/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/jwl.jpg'
-                },{
-                    id: 10,  
-                    name: 'Tino',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 3 | Offlane', 'Riyadh Player'],
-                    description: 'Filipino Dota 2 offlane player known for strong teamfight presence and consistent competitive impact.',
-                    followers: 15500,
-                    kickLink: 'https://kick.com/tinodota',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/dota2tino',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/tino.jpg'
-                },{
-                    id: 11,  
-                    name: 'Karl',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 2 | Midlaner','TI Player', 'ESL One Champion'],
-                    description: 'Filipino Dota 2 midlaner known for sharp mechanics, consistent performance, and international experience.',
-                    followers: 39100,
-                    kickLink: 'https://kick.com/karldotaa',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/KarlDota.Official',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/karl.jpg'
-                },{
-                    id: 12,  
-                    name: 'JG',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 3 | Offlaner'],
-                    description: 'Filipino Dota 2 offlaner known for skillful plays and competitive exposure.',
-                    followers: 18500,
-                    kickLink: 'https://kick.com/jgdota',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/JGdota2',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/jg.png'
-                },{
-                    id: 13,  
-                    name: 'Sep',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 4 | Soft Support'],
-                    description: 'Filipino Dota 2 soft support known for skillful plays and impactful teamfight presence.',
-                    followers: 20000,
-                    kickLink: 'https://kick.com/sepdoto',
-                    websiteLink: 'https://www.sepdoto.com/',
-                    facebookLink: 'https://www.facebook.com/sepdoto',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/sep.png'
-                },{
-                    id: 14,  
-                    name: 'Lewis',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 2 | Midlaner'],
-                    description: 'Filipino Dota 2 midlaner known for sharp mechanics and consistent performance.',
-                    followers: 11100,
-                    kickLink: 'https://kick.com/lewisdotaa',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/profile.php?id=61578067661034',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/lewis.jpg'
-                },{
-                    id: 15,  
-                    name: 'Natsumi',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Riyadh Player', 'Carry for OG'],
-                    description: 'Filipino Dota 2 carry known for sharp mechanics, strategic farming, and international experience.',
-                    followers: 33600,
-                    kickLink: 'https://kick.com/natsumidota',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/natsumidota/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/natsumi.jpg'
-                },{
-                    id: 16,  
-                    name: 'Nikko',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Riyadh Player', 'Offlane for OG'],
-                    description: 'Filipino Dota 2 offlaner recognized for impactful teamfight presence and international experience.',
-                    followers: 24200,
-                    kickLink: 'https://kick.com/nikkodota2',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/NikkoForce/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/nikko.jpg'
-                },{
-                    id: 17,  
-                    name: 'Skem',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'TI Player', 'Riyadh Player', 'Hard Support for OG'],
-                    description: 'Filipino Dota 2 support known for smart plays, solid vision control, and international experience.',
-                    followers: 14700,
-                    kickLink: 'https://kick.com/skemdota123',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/skemdota/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/skem.jpg'
-                },{
-                    id: 18,
-                    name: 'Tims',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Major Champion', 'Top 7 TI', 'WESG Champion', 'Soft Support for OG'],
-                    description: 'Filipino Dota 2 mid player known for high-level mechanics and international success.',
-                    followers: 27200,
-                    kickLink: 'https://kick.com/timsdota',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/timsdotaofficial',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/tims.png'
-                },{
-                    id: 19,  
-                    name: 'Jaunuel',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 5 | Hard Support', 'TI Player', 'Riyadh Player', ],
-                    description: 'Filipino Dota 2 support known for smart positioning, strong game sense, and international competition.',
-                    followers: 29000,
-                    kickLink: 'https://kick.com/jaunueldota',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/JaunuelGaming/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/jaunuel.png'
-                },{
-                    id: 20,  
-                    name: 'Jing',
-                    nameIcon: '',
-                    tags: ['Professional Dota 2 Player', 'Position 5 | Hard Support', 'TI Player'],
-                    description: 'Filipino Dota 2  rising star support known for adaptability, and impactful performances.',
-                    followers: 22700,
-                    kickLink: 'https://kick.com/jingdota',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/p/Jingdota-100082864195706/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/jing.jpg'
-                },{
-                    id: 21,  
-                    name: 'JtzCast',
-                    nameIcon: '',
-                    tags: ['Professional Caster' , 'Dota 2 Streamer', 'Ex Manager of Team Kukuys', 'Kick Streamer'],
-                    description: 'Filipino Dota 2 caster known for insightful live commentary, and engaging audience interaction.',
-                    followers: 18400,
-                    kickLink: 'https://kick.com/jtzcast',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/Jettezee/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/jtz.jpg'
-                },{
-                    id: 22,  
-                    name: 'Nevertheless',
-                    nameIcon: '',
-                    tags: ['Manager of Team Tekla' , 'Dota 2 Streamer', 'Kick Streamer'],
-                    description: 'Content creator known for live commentary, and supporting Team Tekla\'s competitive journey.',
-                    followers: 19100,
-                    kickLink: 'https://kick.com/nevertheless',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/neverthelessdota/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/kyle.jpg'
-                },{
-                    id: 23,  
-                    name: 'LashSegway28',
-                    nameIcon: '',
-                    tags: ['Kick Streamer', 'Dota 2 Streamer', 'Dota 2 Caster'],
-                    description: 'Content creator known for live commentary and variety gameplays.',
-                    followers: 18600,
-                    kickLink: 'https://kick.com/lashsegway28',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/Lashsegway28/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/lash.jpg'
-                },{
-                    id: 24,  
-                    name: 'JaboleroDota',
-                    nameIcon: '',
-                    tags: ['Kick Streamer', 'Dota 2 Streamer', 'IRL Streamer'],
-                    description: 'Content creator known for Dota 2 Streamer and IRL Streamer.',
-                    followers: 12100,
-                    kickLink: 'https://kick.com/jabolerodota',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/Jabolerodota/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/jabolero.jpg?v=1'
-                },{
-                    id: 25,  
-                    name: 'Hubrisss',
-                    nameIcon: '',
-                    tags: ['Kick Streamer', 'Variety Streamer', 'GTA RP Streamer'],
-                    description: 'Content creator known for GTA RP Streamer, variety gameplays, and engaging streams',
-                    followers: 23600,
-                    kickLink: 'https://kick.com/hubrisss',
-                    websiteLink: '',
-                    facebookLink: '',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/hubris.png'
-                },{
-                    id: 26,  
-                    name: 'Chupaeng',
-                    nameIcon: '',
-                    tags: ['Kick Streamer', 'Variety Streamer', 'GTA RP Streamer'],
-                    description: 'Content creator known for GTA RP Streamer, variety gameplays, and engaging streams',
-                    followers: 15300,
-                    kickLink: 'https://kick.com/chupaeng',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/p/Chupaeng-100092376301513/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/chupaeng.jpg'
-                },{
-                    id: 27,  
-                    name: 'SunshineMelodyyy',
-                    nameIcon: '',
-                    tags: ['Kick Streamer', 'Variety Streamer', 'GTA RP Streamer'],
-                    description: 'Content creator known for GTA RP Streamer, variety gameplays, and engaging streams',
-                    followers: 18000,
-                    kickLink: 'https://kick.com/sunshinemelodyyy',
-                    websiteLink: 'https://sunshinemelody.com/',
-                    facebookLink: 'https://www.facebook.com/ItsJoannaGaming/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/sunshine.jpg'
-                },{
-                    id: 28,  
-                    name: 'Jawocolet',
-                    nameIcon: '',
-                    tags: ['Kick Streamer', 'Variety Streamer'],
-                    description: 'Content creator known for variety gameplays, and engaging streams',
-                    followers: 4700,
-                    kickLink: 'https://kick.com/jawocolet',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/jawocolet/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/jawo.jpg'
-                },{
-                    id: 29,  
-                    name: 'Joevy',
-                    nameIcon: '',
-                    tags: ['Dota 2 Streamer', 'Manager of Xctn'],
-                    description: 'Dota 2 streamer and manager of Xctn, supporting Xctn competitive journey.',
-                    followers: 11100,
-                    kickLink: 'https://kick.com/joevydota2',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/physicsjoevy/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/joevy.png'
-                },{
-                    id: 30,  
-                    name: 'RexhaScarlett',
-                    nameIcon: '',
-                    tags: ['Kick Streamer', 'Variety Streamer'],
-                    description: 'Content creator known for variety gameplays, engaging streams, and community-driven content.',
-                    followers: 5800,
-                    kickLink: 'https://kick.com/rexhascarlett',
-                    websiteLink: '',
-                    facebookLink: '',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/rexha.png'
-                },{
-                    id: 31,  
-                    name: 'Sherickab',
-                    nameIcon: '',
-                    tags: ['Kick Streamer', 'Variety Streamer'],
-                    description: 'Content creator known for variety gameplays, engaging streams, and community-driven content.',
-                    followers: 9400,
-                    kickLink: 'https://kick.com/sherickab',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/onlyshericka/',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/sherickab.jpg'
-                },{
-                    id: 32,  
-                    name: 'Moodyemel',
-                    nameIcon: '',
-                    tags: ['Kick Streamer', 'Variety Streamer'],
-                    description: 'Content creator known for variety gameplays, engaging streams, and community-driven content.',
-                    followers: 4100,
-                    kickLink: 'https://kick.com/moodyemel',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/Bananabreiva',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/moodyemel.png'
-                },{
-                    id: 33,  
-                    name: 'Aerein',
-                    nameIcon: '',
-                    tags: ['Kick Streamer', 'Variety Streamer'],
-                    description: 'Content creator known for variety gameplays, engaging streams, and community-driven content.',
-                    followers: 7400,
-                    kickLink: 'https://kick.com/aerein',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/elainecuares',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/ela.png'
-                },{
-                    id: 34,  
-                    name: 'PeachyBunny',
-                    nameIcon: '',
-                    tags: ['Kick Streamer', 'Variety Streamer'],
-                    description: 'Content creator known for variety gameplays, engaging streams, and community-driven content.',
-                    followers: 7900,
-                    kickLink: 'https://kick.com/peachybunny',
-                    websiteLink: '',
-                    facebookLink: '',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/peachy.png'
-                },{
-                    id: 35,  
-                    name: 'Rainzerlyn',
-                    nameIcon: '',
-                    tags: ['Professional Caster','Kick Streamer', 'Variety Streamer'],
-                    description: 'Content creator known for shoutcasting, engaging streams, and community-driven content.',
-                    followers: 13600,
-                    kickLink: 'https://kick.com/rainzerlyn',
-                    websiteLink: '',
-                    facebookLink: 'https://www.facebook.com/statsgirlrain',
-                    isLive: false,
-                    icon: 'fab fa-kickstarter',
-                    image: 'images/kukuys_streamer/rainzerlyn.png'
-                }
-                
-            ]
+            filterType: 'live' as 'all' | 'live',
+            isCheckingLiveStatus: false,
+            isLoading: true,
+            error: null as string | null,
+            liveCheckInterval: null as number | null,
+            streamers: [] as Streamer[]
         }
     },
     computed: {
-        visibleStreamers() {
-            if (this.showMore) {
-                // Show all streamers
-                return this.streamers;
-            } else {
-                // Show only first 6 streamers
-                return this.streamers.slice(0, this.itemsPerLoad);
+        filteredStreamers(): Streamer[] {
+            if (this.filterType === 'live') {
+                return [...this.streamers]
+                    .filter(s => s.isLive)
+                    .sort((a, b) => a.id - b.id);
             }
+            return this.streamers;
         },
-        showMoreButtonVisible() {
-            // Show button only if there are more streamers than the initial display
-            return this.streamers.length > this.itemsPerLoad;
+        visibleStreamers(): Streamer[] {
+            if (this.showMore) {
+                return this.filteredStreamers;
+            }
+            return this.filteredStreamers.slice(0, this.itemsPerLoad);
+        },
+        showMoreButtonVisible(): boolean {
+            return this.filteredStreamers.length > this.itemsPerLoad;
+        },
+        liveCount(): number {
+            return this.streamers.filter(s => s.isLive).length;
         }
     },
     methods: {
@@ -632,7 +245,6 @@ export default {
         toggleShowMore() {
             this.showMore = !this.showMore;
             
-            // Smooth scroll to section when showing more
             if (!this.showMore) {
                 setTimeout(() => {
                     const element = document.getElementById('kukuys');
@@ -641,13 +253,107 @@ export default {
                     }
                 }, 100);
             }
+        },
+        async checkLiveStatus() {
+            this.isCheckingLiveStatus = true;
+
+            try {
+                const checks = this.streamers.map(async (streamer) => {
+                    try {
+                        const res = await fetch(`https://kick.com/api/v1/channels/${streamer.kickUsername}`);
+                        if (!res.ok) return { username: streamer.kickUsername, isLive: false };
+
+                        const data = await res.json();
+                        return {
+                            
+                            username: streamer.kickUsername,
+                            isLive: data.livestream.is_live === true,
+                            viewers: data.livestream.viewer_count || data.livestream.viewers || null
+                        };
+                    } catch {
+                        return { username: streamer.kickUsername, isLive: false };
+                    }
+                });
+
+                const results = await Promise.all(checks);
+
+                results.forEach(result => {
+                    const streamer = this.streamers.find(s => s.kickUsername === result.username);
+                    if (streamer) {
+                        streamer.isLive = result.isLive;
+                        streamer.viewers = result.viewers;
+                    }
+                });
+
+            } finally {
+                this.isCheckingLiveStatus = false;
+            }
+        },
+        async fetchStreamersFromAPI() {
+            this.isLoading = true;
+            this.error = null;
+            
+            try {
+                const response = await axios.get('/api/streamers/detailed');
+                const apiStreamers = response.data.streamers;
+                
+                // Map API data to our Streamer interface
+                this.streamers = apiStreamers.map((streamer: any) => ({
+                    id: streamer.id,
+                    name: streamer.name,
+                    kickUsername: streamer.kickUsername,
+                    nameIcon: streamer.nameIcon || '',
+                    tags: Array.isArray(streamer.tags) ? streamer.tags : [],
+                    description: streamer.description || '',
+                    followers: streamer.followers || 0,
+                    kickLink: streamer.kickLink || `https://kick.com/${streamer.kickUsername}`,
+                    websiteLink: streamer.websiteLink || '',
+                    facebookLink: streamer.facebookLink || '',
+                    isLive: streamer.isLive || false,
+                    icon: streamer.icon || 'fab fa-kickstarter',
+                    image: streamer.image || 'images/kukuys_streamer/default.jpg'
+                }));
+                
+                // After loading streamers, check their live status
+                await this.checkLiveStatus();
+            } catch (error: any) {
+                console.error('Error fetching streamers from API:', error);
+                this.error = error.message || 'Failed to load streamers';
+                
+                // Fallback to hardcoded streamers if API fails
+                this.fallbackToHardcodedStreamers();
+            } finally {
+                this.isLoading = false;
+            }
+        },
+        fallbackToHardcodedStreamers() {
+            // Keep as fallback in case API fails
+            this.streamers = [
+               
+            ];
+            
+            // Check live status for fallback streamers
+            this.checkLiveStatus();
+        }
+    },
+    async mounted() {
+        // Fetch streamers from PHP API
+        await this.fetchStreamersFromAPI();
+        
+        // Check live status every 2 minutes
+        this.liveCheckInterval = window.setInterval(() => {
+            this.checkLiveStatus();
+        }, 120000);
+    },
+    beforeUnmount() {
+        if (this.liveCheckInterval) {
+            clearInterval(this.liveCheckInterval);
         }
     }
 }
 </script>
 
 <style scoped>
-/* Line clamp for description */
 .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -655,7 +361,6 @@ export default {
     overflow: hidden;
 }
 
-/* Custom scrollbar for the section if needed */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -669,8 +374,20 @@ export default {
     border-radius: 4px;
 }
 
-/* Smooth transition for showing more cards */
 .grid {
     transition: all 0.3s ease;
+}
+
+@keyframes liveGlow {
+    0%, 100% {
+        box-shadow: 0 0 0px rgba(239, 68, 68, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(239, 68, 68, 0.9);
+    }
+}
+
+.animate-live-glow {
+    animation: liveGlow 1.8s ease-in-out infinite;
 }
 </style>
