@@ -388,21 +388,6 @@ class StreamerService
                 'image' => 'images/kukuys_streamer/jabolero.jpg?v=1'
             ],
             [
-                'id' => 25,
-                'name' => 'Hubrisss',
-                'kickUsername' => 'hubrisss',
-                'nameIcon' => '',
-                'tags' => ['Kick Streamer', 'Variety Streamer', 'GTA RP Streamer'],
-                'description' => 'Content creator known for GTA RP Streamer, variety gameplays, and engaging streams',
-                'followers' => 23600,
-                'kickLink' => 'https://kick.com/hubrisss',
-                'websiteLink' => '',
-                'facebookLink' => '',
-                'isLive' => false,
-                'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/hubris.png'
-            ],
-            [
                 'id' => 26,
                 'name' => 'Chupaeng',
                 'kickUsername' => 'chupaeng',
@@ -448,6 +433,21 @@ class StreamerService
                 'image' => 'images/kukuys_streamer/jawo.jpg'
             ],
             [
+                'id' => 35,
+                'name' => 'Eyyou',
+                'kickUsername' => 'eyyou',
+                'nameIcon' => '',
+                'tags' => ['Professional Dota 2 Player','Top 7 TI', 'WESG Champion'],
+                'description' => 'Filipino Dota 2 support known for solid vision control, and international experience.',
+                'followers' => 15600,
+                'kickLink' => 'https://kick.com/eyyou',
+                'websiteLink' => '',
+                'facebookLink' => '',
+                'isLive' => false,
+                'icon' => 'fab fa-kickstarter',
+                'image' => 'images/kukuys_streamer/eyyou.jpg'
+            ],
+            [
                 'id' => 29,
                 'name' => 'Joevy',
                 'kickUsername' => 'joevydota2',
@@ -476,21 +476,6 @@ class StreamerService
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
                 'image' => 'images/kukuys_streamer/rexha.png'
-            ],
-            [
-                'id' => 31,
-                'name' => 'Sherickab',
-                'kickUsername' => 'sherickab',
-                'nameIcon' => '',
-                'tags' => ['Kick Streamer', 'Variety Streamer'],
-                'description' => 'Content creator known for variety gameplays, engaging streams, and community-driven content.',
-                'followers' => 9400,
-                'kickLink' => 'https://kick.com/sherickab',
-                'websiteLink' => '',
-                'facebookLink' => 'https://www.facebook.com/onlyshericka/',
-                'isLive' => false,
-                'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/sherickab.jpg'
             ],
             [
                 'id' => 32,
@@ -538,7 +523,7 @@ class StreamerService
                 'image' => 'images/kukuys_streamer/peachy.png'
             ],
             [
-                'id' => 35,
+                'id' => 36,
                 'name' => 'Rainzerlyn',
                 'kickUsername' => 'rainzerlyn',
                 'nameIcon' => '',
@@ -553,7 +538,7 @@ class StreamerService
                 'image' => 'images/kukuys_streamer/rainzerlyn.png'
             ],
             [
-                'id' => 35,
+                'id' => 37,
                 'name' => 'Meepwet',
                 'kickUsername' => 'meepwet',
                 'nameIcon' => '',
