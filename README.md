@@ -1,7 +1,7 @@
 # Kukuys Live
 
 Kukuys Live is a community web application built for the Kukuys streamer
-group (Dota 2 professionals).\
+group (Dota 2 professionals).
 It serves as a centralized platform where fans and members can view
 streamer profiles, check who is currently live, and access internal
 community tools.
@@ -12,12 +12,12 @@ Built with Laravel 12 and Vue 3.
 
 ## 🚀 Features
 
--   🔴 Streamer Profiles\
--   📡 Live Stream Status Checker\
--   📊 Kukuys Dashboard\
--   🎮 Dota Pub Tracker\
--   🤝 Taryahan (Matchmaking)\
--   📩 Partner Inquiry System\
+-   🔴 Streamer Profiles
+-   📡 Live Stream Status Checker
+-   📊 Kukuys Dashboard
+-   🎮 Dota Pub Tracker
+-   🤝 Taryahan (Matchmaking)
+-   📩 Partner Inquiry System
 -   🔐 Authentication System
 
 ------------------------------------------------------------------------
@@ -45,7 +45,7 @@ Built with Laravel 12 and Vue 3.
 
 Clone the repository:
 
-git clone https://github.com/williamdancel/kukuys.git\
+git clone https://github.com/williamdancel/kukuys.git
 cd kukuys
 
 Install PHP dependencies:
@@ -103,7 +103,7 @@ php artisan db:seed --class=UserSeeder
 
 Default login credentials:
 
-Email: admin@example.com\
+Email: admin@example.com
 Password: password
 
 ⚠️ Make sure to change the default password in production.
@@ -124,18 +124,18 @@ php artisan serve
 
 This project was built as a passion project to:
 
--   Support the Kukuys streaming community\
--   Practice modern Laravel + Vue full-stack architecture\
--   Implement real-world dashboard and tracking features\
+-   Support the Kukuys streaming community
+-   Practice modern Laravel + Vue full-stack architecture
+-   Implement real-world dashboard and tracking features
 -   Improve API structuring and frontend integration
 
 ------------------------------------------------------------------------
 
 ## 👨‍💻 Author
 
-William Harry A. Dancel\
-Full-Stack PHP Developer\
-GitHub: https://github.com/williamdancel\
+William Harry A. Dancel
+Full-Stack PHP Developer
+GitHub: https://github.com/williamdancel
 Email: william.a.dancel@gmail.com
 
 ------------------------------------------------------------------------
