@@ -1,4 +1,5 @@
 <?php
+
 // app/Services/TaryahanMatchService.php
 
 namespace App\Services;
@@ -15,25 +16,25 @@ class TaryahanMatchService
     public function getAllMatches(array $filters = []): LengthAwarePaginator
     {
         $query = TaryahanMatch::query();
-        
+
         // Apply search filter
-        if (!empty($filters['search'])) {
+        if (! empty($filters['search'])) {
             $query->search($filters['search']);
         }
-        
+
         // Apply date range filter
-        if (!empty($filters['date_from']) || !empty($filters['date_to'])) {
+        if (! empty($filters['date_from']) || ! empty($filters['date_to'])) {
             $query->dateRange($filters['date_from'] ?? null, $filters['date_to'] ?? null);
         }
-        
+
         // Apply sorting (default by latest)
         $sortField = $filters['sort_by'] ?? 'match_date';
         $sortDirection = $filters['sort_dir'] ?? 'desc';
         $query->orderBy($sortField, $sortDirection);
-        
+
         // Paginate results
         $perPage = $filters['per_page'] ?? 20;
-        
+
         return $query->paginate($perPage);
     }
 
@@ -62,6 +63,7 @@ class TaryahanMatchService
     {
         return DB::transaction(function () use ($id) {
             $match = TaryahanMatch::findOrFail($id);
+
             return $match->delete();
         });
     }
@@ -74,7 +76,7 @@ class TaryahanMatchService
         $totalMatches = TaryahanMatch::count();
         $teamAWins = TaryahanMatch::where('winner', 'team_a')->count();
         $teamBWins = TaryahanMatch::where('winner', 'team_b')->count();
-        
+
         return [
             'total_matches' => $totalMatches,
             'team_a_wins' => $teamAWins,
@@ -93,7 +95,7 @@ class TaryahanMatchService
     {
         $teamAPlayers = TaryahanMatch::pluck('team_a_players')->flatten();
         $teamBPlayers = TaryahanMatch::pluck('team_b_players')->flatten();
-        
+
         return $teamAPlayers->merge($teamBPlayers)->unique()->count();
     }
 
@@ -111,7 +113,7 @@ class TaryahanMatchService
             ->sortDesc()
             ->take(5)
             ->toArray();
-        
+
         return $captains;
     }
 }

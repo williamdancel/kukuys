@@ -10,6 +10,7 @@ class StreamerService
     public function getStreamers(): array
     {
         $detailed = $this->getStreamersWithDetails();
+
         return array_column($detailed, 'kickUsername');
     }
 
@@ -20,7 +21,7 @@ class StreamerService
     {
         return $this->getStreamersWithDetails();
     }
- 
+
     /**
      * Get streamers with details
      */
@@ -40,7 +41,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/gaming/KukuDota.Official',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/kuku.jpg'
+                'image' => 'images/kukuys_streamer/kuku.jpg',
             ],
             [
                 'id' => 2,
@@ -55,7 +56,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/Gabbidoto',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/gabbi.jpg'
+                'image' => 'images/kukuys_streamer/gabbi.jpg',
             ],
             [
                 'id' => 3,
@@ -70,7 +71,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/armeldoto/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/armel.png'
+                'image' => 'images/kukuys_streamer/armel.png',
             ],
             [
                 'id' => 4,
@@ -85,7 +86,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/djdoto',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/dj.jpg'
+                'image' => 'images/kukuys_streamer/dj.jpg',
             ],
             [
                 'id' => 5,
@@ -100,7 +101,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/yoweDotes',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/yowe.jpg'
+                'image' => 'images/kukuys_streamer/yowe.jpg',
             ],
             [
                 'id' => 6,
@@ -115,7 +116,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/PalosDota/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/palos.jpg'
+                'image' => 'images/kukuys_streamer/palos.jpg',
             ],
             [
                 'id' => 7,
@@ -130,7 +131,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/Kokzdoto/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/kokz.png'
+                'image' => 'images/kukuys_streamer/kokz.png',
             ],
             [
                 'id' => 8,
@@ -145,7 +146,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/Abatdota/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/abat.png'
+                'image' => 'images/kukuys_streamer/abat.png',
             ],
             [
                 'id' => 9,
@@ -160,7 +161,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/jwldota/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/jwl.jpg'
+                'image' => 'images/kukuys_streamer/jwl.jpg',
             ],
             [
                 'id' => 10,
@@ -175,7 +176,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/dota2tino',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/tino.jpg'
+                'image' => 'images/kukuys_streamer/tino.jpg',
             ],
             [
                 'id' => 11,
@@ -190,7 +191,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/KarlDota.Official',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/karl.jpg'
+                'image' => 'images/kukuys_streamer/karl.jpg',
             ],
             [
                 'id' => 12,
@@ -205,7 +206,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/JGdota2',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/jg.png'
+                'image' => 'images/kukuys_streamer/jg.png',
             ],
             [
                 'id' => 13,
@@ -220,7 +221,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/sepdoto',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/sep.png'
+                'image' => 'images/kukuys_streamer/sep.png',
             ],
             [
                 'id' => 14,
@@ -235,7 +236,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/profile.php?id=61578067661034',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/lewis.jpg'
+                'image' => 'images/kukuys_streamer/lewis.jpg',
             ],
             [
                 'id' => 15,
@@ -250,7 +251,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/natsumidota/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/natsumi.jpg'
+                'image' => 'images/kukuys_streamer/natsumi.jpg',
             ],
             [
                 'id' => 16,
@@ -265,7 +266,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/NikkoForce/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/nikko.jpg'
+                'image' => 'images/kukuys_streamer/nikko.jpg',
             ],
             [
                 'id' => 17,
@@ -280,7 +281,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/skemdota/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/skem.jpg'
+                'image' => 'images/kukuys_streamer/skem.jpg',
             ],
             [
                 'id' => 18,
@@ -295,7 +296,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/timsdotaofficial',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/tims.png'
+                'image' => 'images/kukuys_streamer/tims.png',
             ],
             [
                 'id' => 19,
@@ -310,7 +311,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/JaunuelGaming/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/jaunuel.png'
+                'image' => 'images/kukuys_streamer/jaunuel.png',
             ],
             [
                 'id' => 20,
@@ -325,7 +326,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/p/Jingdota-100082864195706/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/jing.jpg'
+                'image' => 'images/kukuys_streamer/jing.jpg',
             ],
             [
                 'id' => 21,
@@ -340,7 +341,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/Jettezee/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/jtz.jpg'
+                'image' => 'images/kukuys_streamer/jtz.jpg',
             ],
             [
                 'id' => 22,
@@ -355,7 +356,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/neverthelessdota/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/kyle.jpg'
+                'image' => 'images/kukuys_streamer/kyle.jpg',
             ],
             [
                 'id' => 23,
@@ -370,7 +371,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/Lashsegway28/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/lash.jpg'
+                'image' => 'images/kukuys_streamer/lash.jpg',
             ],
             [
                 'id' => 24,
@@ -385,7 +386,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/Jabolerodota/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/jabolero.jpg?v=1'
+                'image' => 'images/kukuys_streamer/jabolero.jpg?v=1',
             ],
             [
                 'id' => 26,
@@ -400,7 +401,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/p/Chupaeng-100092376301513/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/chupaeng.jpg'
+                'image' => 'images/kukuys_streamer/chupaeng.jpg',
             ],
             [
                 'id' => 27,
@@ -415,7 +416,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/ItsJoannaGaming/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/sunshine.jpg'
+                'image' => 'images/kukuys_streamer/sunshine.jpg',
             ],
             [
                 'id' => 28,
@@ -430,14 +431,14 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/jawocolet/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/jawo.jpg'
+                'image' => 'images/kukuys_streamer/jawo.jpg',
             ],
             [
                 'id' => 35,
                 'name' => 'Eyyou',
                 'kickUsername' => 'eyyou',
                 'nameIcon' => '',
-                'tags' => ['Professional Dota 2 Player','Top 7 TI', 'WESG Champion'],
+                'tags' => ['Professional Dota 2 Player', 'Top 7 TI', 'WESG Champion'],
                 'description' => 'Filipino Dota 2 support known for solid vision control, and international experience.',
                 'followers' => 15600,
                 'kickLink' => 'https://kick.com/eyyou',
@@ -445,7 +446,7 @@ class StreamerService
                 'facebookLink' => '',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/eyyou.jpg'
+                'image' => 'images/kukuys_streamer/eyyou.jpg',
             ],
             [
                 'id' => 29,
@@ -460,7 +461,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/physicsjoevy/',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/joevy.png'
+                'image' => 'images/kukuys_streamer/joevy.png',
             ],
             [
                 'id' => 30,
@@ -475,7 +476,7 @@ class StreamerService
                 'facebookLink' => '',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/rexha.png'
+                'image' => 'images/kukuys_streamer/rexha.png',
             ],
             [
                 'id' => 32,
@@ -490,7 +491,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/Bananabreiva',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/moodyemel.png'
+                'image' => 'images/kukuys_streamer/moodyemel.png',
             ],
             [
                 'id' => 33,
@@ -505,7 +506,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/elainecuares',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/ela.png'
+                'image' => 'images/kukuys_streamer/ela.png',
             ],
             [
                 'id' => 34,
@@ -520,7 +521,7 @@ class StreamerService
                 'facebookLink' => '',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/peachy.png'
+                'image' => 'images/kukuys_streamer/peachy.png',
             ],
             [
                 'id' => 36,
@@ -535,7 +536,7 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/statsgirlrain',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/rainzerlyn.png'
+                'image' => 'images/kukuys_streamer/rainzerlyn.png',
             ],
             [
                 'id' => 37,
@@ -550,8 +551,8 @@ class StreamerService
                 'facebookLink' => 'https://www.facebook.com/meepwetgaming',
                 'isLive' => false,
                 'icon' => 'fab fa-kickstarter',
-                'image' => 'images/kukuys_streamer/meepwet.jpg'
-            ]
+                'image' => 'images/kukuys_streamer/meepwet.jpg',
+            ],
         ];
     }
 }

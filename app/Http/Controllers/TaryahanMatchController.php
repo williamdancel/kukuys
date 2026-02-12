@@ -1,9 +1,9 @@
 <?php
+
 // app/Http/Controllers/Api/TaryahanMatchController.php
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\TaryahanMatch;
 use App\Services\TaryahanMatchService;
 use Illuminate\Http\JsonResponse;
@@ -70,31 +70,31 @@ class TaryahanMatchController extends Controller
 
         try {
             $data = $validator->validated();
-            
+
             // Ensure captain is in their respective team
-            if (!in_array($data['team_a_captain'], $data['team_a_players'])) {
+            if (! in_array($data['team_a_captain'], $data['team_a_players'])) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Validation failed',
                     'errors' => [
-                        'team_a_captain' => ['Captain must be a player in Team A']
+                        'team_a_captain' => ['Captain must be a player in Team A'],
                     ],
                 ], 422);
             }
-            
-            if (!in_array($data['team_b_captain'], $data['team_b_players'])) {
+
+            if (! in_array($data['team_b_captain'], $data['team_b_players'])) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Validation failed',
                     'errors' => [
-                        'team_b_captain' => ['Captain must be a player in Team B']
+                        'team_b_captain' => ['Captain must be a player in Team B'],
                     ],
                 ], 422);
             }
-            
+
             // Winner can be null initially
             $data['winner'] = $data['winner'] ?? null;
-            
+
             $match = $this->matchService->createMatch($data);
 
             return response()->json([
@@ -119,7 +119,7 @@ class TaryahanMatchController extends Controller
         try {
             $match = $this->matchService->getMatchById($id);
 
-            if (!$match) {
+            if (! $match) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Match not found',
@@ -148,7 +148,7 @@ class TaryahanMatchController extends Controller
         try {
             $result = $this->matchService->deleteMatch($id);
 
-            if (!$result) {
+            if (! $result) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Failed to delete match',
@@ -186,14 +186,14 @@ class TaryahanMatchController extends Controller
 
         try {
             $match = TaryahanMatch::find($id);
-            
-            if (!$match) {
+
+            if (! $match) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Match not found',
                 ], 404);
             }
-            
+
             $match->winner = $request->winner;
             $match->save();
 

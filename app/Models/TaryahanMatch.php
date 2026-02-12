@@ -1,5 +1,5 @@
 <?php
-// app/Models/TaryahanMatch.php
+
 
 namespace App\Models;
 
@@ -33,15 +33,17 @@ class TaryahanMatch extends Model
      */
     public function scopeSearch($query, $search)
     {
-        if (!$search) return $query;
-        
+        if (! $search) {
+            return $query;
+        }
+
         return $query->where(function ($q) use ($search) {
-            $q->where('team_a_name', 'like', '%' . $search . '%')
-              ->orWhere('team_b_name', 'like', '%' . $search . '%')
-              ->orWhere('team_a_captain', 'like', '%' . $search . '%')
-              ->orWhere('team_b_captain', 'like', '%' . $search . '%')
-              ->orWhereJsonContains('team_a_players', $search)
-              ->orWhereJsonContains('team_b_players', $search);
+            $q->where('team_a_name', 'like', '%'.$search.'%')
+                ->orWhere('team_b_name', 'like', '%'.$search.'%')
+                ->orWhere('team_a_captain', 'like', '%'.$search.'%')
+                ->orWhere('team_b_captain', 'like', '%'.$search.'%')
+                ->orWhereJsonContains('team_a_players', $search)
+                ->orWhereJsonContains('team_b_players', $search);
         });
     }
 
@@ -53,11 +55,11 @@ class TaryahanMatch extends Model
         if ($dateFrom) {
             $query->whereDate('match_date', '>=', $dateFrom);
         }
-        
+
         if ($dateTo) {
             $query->whereDate('match_date', '<=', $dateTo);
         }
-        
+
         return $query;
     }
 

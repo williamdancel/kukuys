@@ -1,4 +1,5 @@
 <?php
+
 // app/Models/DotaPubRecord.php
 
 namespace App\Models;
@@ -40,7 +41,7 @@ class DotaPubRecord extends Model
      */
     public function scopeSearch($query, $search)
     {
-        return $query->where('name', 'like', '%' . $search . '%');
+        return $query->where('name', 'like', '%'.$search.'%');
     }
 
     /**
@@ -51,11 +52,11 @@ class DotaPubRecord extends Model
         if ($dateFrom) {
             $query->whereDate('match_date', '>=', $dateFrom);
         }
-        
+
         if ($dateTo) {
             $query->whereDate('match_date', '<=', $dateTo);
         }
-        
+
         return $query;
     }
 
@@ -67,7 +68,7 @@ class DotaPubRecord extends Model
         if ($this->total_pubs === 0) {
             return 0;
         }
-        
+
         return ($this->win / $this->total_pubs) * 100;
     }
 

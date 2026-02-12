@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\DotaPubRecord;
 use App\Services\DotaPubRecordService;
 use Illuminate\Http\JsonResponse;
@@ -95,7 +94,7 @@ class DotaPubRecordController extends Controller
         try {
             $record = $this->recordService->getRecordById($id);
 
-            if (!$record) {
+            if (! $record) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Record not found',
@@ -162,7 +161,7 @@ class DotaPubRecordController extends Controller
         try {
             $result = $this->recordService->deleteRecord($id);
 
-            if (!$result) {
+            if (! $result) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Failed to delete record',
